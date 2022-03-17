@@ -17,62 +17,69 @@ public class UnitMove : MonoBehaviour
     }
     private void Update()
     {
-        //Debug.DrawRay(_cam.transform.position, _cam.ScreenPointToRay(Input.mousePosition).direction * 100);
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
 
-        if (_plane.Raycast(ray, out float distance) && _currentUnit != null)
+        MovingUnit(ray, _plane, _currentUnit);
+        SelectUnit(ray,ref _currentUnit,ref _lastPosition);
+        UnselectUnit(ref _currentUnit, _board, _mergeUnit);
+    }
+
+    private void MovingUnit(Ray ray, Plane plane, Unit currentUnit)
+    {
+        if (plane.Raycast(ray, out float distance) && currentUnit != null)
         {
             var wP = ray.GetPoint(distance);
-            var yHalfScale = _currentUnit.transform.localScale.y * 0.5f;
+            var yHalfScale = currentUnit.transform.localScale.y * 0.5f;
             var unitNewPosition = wP + Vector3.up * yHalfScale;
-            _currentUnit.transform.position = unitNewPosition;
+            currentUnit.transform.position = unitNewPosition;
         }
+    }
 
+    private void SelectUnit(Ray ray,ref Unit currentUnit,ref Vector3 lastPosition)
+    {
         if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out RaycastHit hit, 1000) && hit.collider.CompareTag("Unit"))
         {
-            _currentUnit = hit.collider.gameObject.GetComponent<Unit>();
-            _lastPosition = _currentUnit.transform.position;
+            currentUnit = hit.collider.gameObject.GetComponent<Unit>();
+            lastPosition = currentUnit.transform.position;
         }
-
-        if (Input.GetMouseButtonUp(0) && _currentUnit != null)
+    }
+    private void UnselectUnit(ref Unit currentUnit, Board board, MergeUnit mergeUnit)
+    {
+        if (Input.GetMouseButtonUp(0) && currentUnit != null)
         {
-            var unitPos = _currentUnit.transform.position;
+            var unitPos = currentUnit.transform.position;
             var _roundedUnitPos = new Vector3(Mathf.RoundToInt(unitPos.x), unitPos.y, Mathf.RoundToInt(unitPos.z));
-            if (!_board.MovingArea.Contains(new Vector2(_roundedUnitPos.x, _roundedUnitPos.z)))
+            var isOnBoard = board.MovingArea.Contains(new Vector2(_roundedUnitPos.x, _roundedUnitPos.z));
+            var x = (int)(_roundedUnitPos.x - board.MovingArea.x);
+            var y = (int)(_roundedUnitPos.z - board.MovingArea.y);
+            Unit unitOnNewPosition = null;
+
+            if (isOnBoard)
             {
-                _currentUnit.transform.position = _lastPosition;
+                unitOnNewPosition = board.GetObjectFromBoard(x, y);
             }
             else
             {
-                var x = (int)(_roundedUnitPos.x - _board.MovingArea.x);
-                var y = (int)(_roundedUnitPos.z - _board.MovingArea.y);
-
-                if (_board.GetObjectFromBoard(x, y) != null && _currentUnit.tag == _board.GetObjectFromBoard(x, y).tag && _currentUnit != _board.GetObjectFromBoard(x, y))
-                {
-                    var mergeSucces = _mergeUnit.MergeTwoUnit(_currentUnit, _board.GetObjectFromBoard(x, y));
-                    if (mergeSucces)
-                    {
-                        _board.SetObjectToBoard(_currentUnit.x, _currentUnit.y, null);
-                        _board.SetObjectToBoard(x, y, _currentUnit);
-                        _currentUnit.transform.position = _roundedUnitPos;
-                    }
-                    else
-                    {
-                        _currentUnit.transform.position = _lastPosition;
-                    }
-
-                }
-                else if (_board.GetObjectFromBoard(x, y) == null)
-                {
-                    _board.SetObjectToBoard(_currentUnit.x, _currentUnit.y, null);
-                    _board.SetObjectToBoard(x, y, _currentUnit);
-                    _currentUnit.transform.position = _roundedUnitPos;
-                }
-
-                _currentUnit.x = x;
-                _currentUnit.y = y;
+                currentUnit.transform.position = _lastPosition;
+                currentUnit = null;
+                return;
             }
-            _currentUnit = null;
+
+
+            if (unitOnNewPosition == null || mergeUnit.MergeTwoUnit(currentUnit, unitOnNewPosition))
+            {
+                board.SetObjectToBoard(currentUnit.x, currentUnit.y, null);
+                board.SetObjectToBoard(x, y, currentUnit);
+                currentUnit.transform.position = _roundedUnitPos;
+                currentUnit.x = x;
+                currentUnit.y = y;
+
+            }
+            else
+            {
+                currentUnit.transform.position = _lastPosition;
+            }
+            currentUnit = null;
         }
     }
 }
