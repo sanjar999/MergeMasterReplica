@@ -5,12 +5,11 @@ using UnityEngine.UI;
 public class Fight : MonoBehaviour
 {
     [SerializeField] Button _fightBtn;
-    [SerializeField] GameObject _tempTarget;
 
     void Start()
     {
-        _fightBtn.onClick.AddListener(() => OnFight?.Invoke(_tempTarget));
+        _fightBtn.onClick.AddListener(() => OnFight?.Invoke());
     }
 
-    public Action<GameObject> OnFight;
+    public Action OnFight;
 }

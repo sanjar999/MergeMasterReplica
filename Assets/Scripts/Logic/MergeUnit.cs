@@ -6,17 +6,18 @@ public class MergeUnit : MonoBehaviour
 
     public bool MergeTwoUnit(Unit unit_1, Unit unit_2)
     {
-        if ( unit_1.Level != unit_2.Level ||
+        if (unit_1.GetLevel() != unit_2.GetLevel() ||
             !unit_2.CompareTag(unit_1.tag) ||
-             unit_1 == unit_2)
+             unit_1 == unit_2 ||
+             unit_1.GetType() != unit_2.GetType())
             return false;
 
-        _board.SetObjectToBoard(unit_2.x, unit_2.y, null);
+        var coord = unit_2.GetCoord();
+        _board.SetObjectToBoard(coord.x, coord.y, null);
         _board.RemoveUnit(unit_2);
+        unit_1.LevelUp();
 
-        unit_2.gameObject.SetActive(false);
-        //Destroy(unit_2);
-        unit_1.Level++;
+        Destroy(unit_2.gameObject);
         return true;
     }
 

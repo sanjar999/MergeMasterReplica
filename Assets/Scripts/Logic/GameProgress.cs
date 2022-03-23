@@ -22,9 +22,11 @@ public class GameProgress : MonoBehaviour
 
         for (int i = 0; i < _units.Count; i++)
         {
-            PlayerPrefs.SetInt($"units_{i}_level", _units[i].Level);
-            PlayerPrefs.SetInt($"units_{i}_x", _units[i].x);
-            PlayerPrefs.SetInt($"units_{i}_y", _units[i].y);
+            var coord = _units[i].GetCoord();
+            PlayerPrefs.SetInt($"units_{i}_level", _units[i].GetLevel());
+            PlayerPrefs.SetInt($"units_{i}_x", coord.x);
+            PlayerPrefs.SetInt($"units_{i}_y", coord.y);
+            PlayerPrefs.SetInt($"units_{i}_type", (int)_units[i].GetUnitType());
         }
     }
 }

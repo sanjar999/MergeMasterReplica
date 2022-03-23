@@ -21,11 +21,11 @@ public class LevelIndicator : MonoBehaviour
     private void Start()
     {
         _canvas.worldCamera = Camera.main;
+        UpdateLevel();
     }
 
     private void UpdateLevel()
     {
-        _levelText.text = _unit.Level.ToString();
+        _levelText.text = _unit.GetLevel().ToString();
     }
-
 }

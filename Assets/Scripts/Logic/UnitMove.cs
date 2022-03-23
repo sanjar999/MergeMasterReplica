@@ -68,11 +68,11 @@ public class UnitMove : MonoBehaviour
 
             if (unitOnNewPosition == null || mergeUnit.MergeTwoUnit(currentUnit, unitOnNewPosition))
             {
-                board.SetObjectToBoard(currentUnit.x, currentUnit.y, null);
+                var coord = currentUnit.GetCoord();
+                board.SetObjectToBoard(coord.x, coord.y, null);
                 board.SetObjectToBoard(x, y, currentUnit);
                 currentUnit.transform.position = _roundedUnitPos;
-                currentUnit.x = x;
-                currentUnit.y = y;
+                currentUnit.SetCoord(new Vector2Int(x,y));
 
             }
             else

@@ -5,7 +5,7 @@ public class UnitSpawn : MonoBehaviour
 {
     [SerializeField] Fight _fight;
     [SerializeField] EnemySpawner _enemySpawner;
-    [SerializeField] Unit _unit;
+    [SerializeField] Unit[] _unitTypes;
     [SerializeField] Button _spawnButton;
     [SerializeField] Board _board;
 
@@ -28,14 +28,17 @@ public class UnitSpawn : MonoBehaviour
                 var unit = _board.GetObjectFromBoard(x, y);
                 if (unit == null)
                 {
-                    var instance = Instantiate(_unit);
+
+                    int randomUnitIndex = Random.Range(0, _unitTypes.Length);
+                    var instance = Instantiate(_unitTypes[randomUnitIndex]);
+
                     _board.SetObjectToBoard(x, y, instance);
 
                     //setting index off spawned unit
-                    instance.x = x;
-                    instance.y = y;
-                    instance._fight = _fight;
-                    instance._enemySpawner = _enemySpawner;
+                    instance.SetCoord(new Vector2Int(x,y));
+                    instance.SetUnitType((Unit.UnitType)randomUnitIndex);
+                    instance.SetFight(_fight);
+                    instance.SetEnemySpawner(_enemySpawner);
                     _board.AddUnit(instance);
 
                     var yHalfScale = instance.transform.localScale.y * 0.5f;
@@ -54,22 +57,25 @@ public class UnitSpawn : MonoBehaviour
         {
 
             var unitLevel = PlayerPrefs.GetInt($"units_{i}_level");
-            var unitXIndex = PlayerPrefs.GetInt($"units_{i}_x");
-            var unitYIndex = PlayerPrefs.GetInt($"units_{i}_y");
-            var instance = Instantiate(_unit);
-            _board.SetObjectToBoard(unitXIndex, unitYIndex, instance);
+            var unitXCoord = PlayerPrefs.GetInt($"units_{i}_x");
+            var unitYCoord = PlayerPrefs.GetInt($"units_{i}_y");
+            var unitType = PlayerPrefs.GetInt($"units_{i}_type");
+            var instance = Instantiate(_unitTypes[unitType]);
+
+            _board.SetObjectToBoard(unitXCoord, unitYCoord, instance);
 
             //setting index off spawned unit
-            instance.x = unitXIndex;
-            instance.y = unitYIndex;
-            instance.Level = unitLevel;
-            instance._fight = _fight;
-            instance._enemySpawner = _enemySpawner;
+            instance.SetCoord(new Vector2Int(unitXCoord,unitYCoord));
+            instance.SetLevel(unitLevel);
+            instance.SetUnitType((Unit.UnitType)unitType);
+            instance.SetFight(_fight);
+            instance.SetEnemySpawner(_enemySpawner);
+
             _board.AddUnit(instance);
 
             var yHalfScale = instance.transform.localScale.y * 0.5f;
             //index to position
-            instance.transform.position = new Vector3(unitXIndex + _board.MovingArea.x, yHalfScale, unitYIndex + _board.MovingArea.y);
+            instance.transform.position = new Vector3(unitXCoord + _board.MovingArea.x, yHalfScale, unitYCoord + _board.MovingArea.y);
         }
     }
 }

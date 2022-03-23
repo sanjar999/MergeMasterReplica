@@ -7,21 +7,21 @@ public class Board : MonoBehaviour
 
     Unit[,] _unitsOnBoard;
     public Rect MovingArea { get => _movingAreaBounds; }
-    private List<Unit> _units = new List<Unit>();
+    private readonly List<Unit> _boardUnits = new List<Unit>();
 
     public void AddUnit(Unit unit)
     {
-        _units.Add(unit);
+        _boardUnits.Add(unit);
     }
 
     public void RemoveUnit(Unit unit)
     {
-        _units.Remove(unit);
+        _boardUnits.Remove(unit);
     }
 
     public List<Unit> GetUnits()
     {
-        return _units;
+        return _boardUnits;
     }
 
     void Start()
