@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Unit : MonoBehaviour
 {
+    [SerializeField] protected Animator _animator;
+    [SerializeField] protected GameObject _mesh;
     public enum UnitType { range, melee }
 
     protected Vector2Int _coord;
@@ -37,18 +39,22 @@ public class Unit : MonoBehaviour
     public void SetUnitType(UnitType unitType) { _unitType = unitType; }
 
     private float damageOffset = 0;
+    private List<Enemy> _enemies;
 
     private void Start()
     {
         if (_fight)
-            _fight.OnFight += () => _isFight = true;
+            _fight.OnFight += () =>  _isFight = true; 
 
         _agent = GetComponent<NavMeshAgent>();
+        _enemies = _enemySpawner.GetEnemies();
+
 
     }
     private void OnDisable()
     {
-        _fight.OnFight -= () => _isFight = true;
+        if (_fight)
+            _fight.OnFight -= () => _isFight = true; 
 
     }
 
@@ -58,31 +64,44 @@ public class Unit : MonoBehaviour
         {
             Attack();
         }
+        _animator.SetFloat("Blend", _agent.velocity.magnitude);
+
+    }
+
+    public void StartFightAnim()
+    {
+        _animator.SetBool("isAttack", true);
     }
 
     protected virtual void Attack()
     {
-        var enemies = _enemySpawner.GetEnemies();
         damageOffset += Time.deltaTime;
 
         if (!_enemySpawner.HasEnemy())
         {
             _agent.isStopped = true;
+            _animator.SetBool("isAttack",false);
             return;
         }
 
         if (!_target)
-            _target = GetCloseEnemy(enemies).gameObject.transform;
+        {
+            _target = GetCloseEnemy(_enemies).gameObject.transform;
+        }
         else
         {
             _agent.SetDestination(_target.position);
+            transform.LookAt(new Vector3(_target.position.x, 0, _target.position.z));
+
             _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-            if ( _agent.remainingDistance <= _agent.stoppingDistance && damageOffset > .3f)
+            if (_agent.remainingDistance <= _agent.stoppingDistance && damageOffset > .3f)
             {
                 damageOffset = 0;
                 DealDamage(_target.GetComponent<Enemy>(), _damage * _level);
+
             }
         }
+        transform.LookAt(new Vector3(_target.position.x, 0, _target.position.z));
     }
 
     public Enemy GetCloseEnemy(List<Enemy> enemies)
@@ -106,10 +125,16 @@ public class Unit : MonoBehaviour
         OnDealDamage?.Invoke();
 
     }
-    protected virtual void GetDamage(float amount)
+    public virtual void GetDamage(float amount)
     {
-        _health -= amount - _defence;
+        _target = GetCloseEnemy(_enemies).gameObject.transform;
+
+        _health -= amount;
         OnGetDamage?.Invoke();
+        if (_health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public Action OnGetDamage;

@@ -24,7 +24,7 @@ public class Board : MonoBehaviour
         return _boardUnits;
     }
 
-    void Start()
+    void Awake()
     {
         int x = (int)_movingAreaBounds.width;
         int y = (int)_movingAreaBounds.height;
@@ -40,5 +40,4 @@ public class Board : MonoBehaviour
     {
         return _unitsOnBoard[x, y];
     }
-
 }

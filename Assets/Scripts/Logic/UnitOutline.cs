@@ -48,5 +48,4 @@ public class UnitOutline : MonoBehaviour
         Graphics.ExecuteCommandBuffer(commands);
         commands.Dispose();
     }
-
 }

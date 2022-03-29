@@ -1,14 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UnitSpawn : MonoBehaviour
+public class UnitSpawner : MonoBehaviour
 {
     [SerializeField] Fight _fight;
     [SerializeField] EnemySpawner _enemySpawner;
     [SerializeField] Unit[] _unitTypes;
     [SerializeField] Button _spawnButton;
     [SerializeField] Board _board;
+    [SerializeField] Transform _parent;
 
+    public List<Unit> GetUnits() => _board.GetUnits();
+
+    public bool HasUnit()
+    {
+        foreach (var enemy in _board.GetUnits())
+        {
+            if (enemy != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private void Awake()
     {

@@ -39,7 +39,7 @@ public class UnitMove : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out RaycastHit hit, 1000) && hit.collider.CompareTag("Unit"))
         {
-            currentUnit = hit.collider.gameObject.GetComponent<Unit>();
+            currentUnit = hit.collider.gameObject.GetComponentInParent<Unit>();
             lastPosition = currentUnit.transform.position;
         }
     }
