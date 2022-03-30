@@ -26,6 +26,18 @@ public class TileSpawner : MonoBehaviour
         SpawnTiles();
     }
 
+    public bool HasEmptyTile()
+    {
+        foreach (var tile in _tiles)
+        {
+            if (!tile.HasUnit())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void SpawnTiles()
     {
         for (int x = 0; x < _boardWidth; x++)

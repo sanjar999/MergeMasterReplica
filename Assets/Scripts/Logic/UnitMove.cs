@@ -1,11 +1,10 @@
+using System;
 using UnityEngine;
 
 public class UnitMove : MonoBehaviour
 {
     [SerializeField] Transform _planePosition;
-    [SerializeField] Board _board;
     [SerializeField] MergeUnit _mergeUnit;
-    [SerializeField] Vector3 _gridSize;
     Vector3 _lastPosition;
     Unit _currentUnit;
     Camera _cam;
@@ -22,7 +21,7 @@ public class UnitMove : MonoBehaviour
 
         MovingUnit(ray, _plane, _currentUnit);
         SelectUnit(ray,ref _currentUnit,ref _lastPosition);
-        UnselectUnit(ref _currentUnit, _board, _mergeUnit);
+        UnselectUnit(ref _currentUnit, _mergeUnit);
     }
 
     private void MovingUnit(Ray ray, Plane plane, Unit currentUnit)
@@ -44,39 +43,34 @@ public class UnitMove : MonoBehaviour
             lastPosition = currentUnit.transform.position;
         }
     }
-    private void UnselectUnit(ref Unit currentUnit, Board board, MergeUnit mergeUnit)
+    private void UnselectUnit(ref Unit currentUnit, MergeUnit mergeUnit)
     {
-        if (Input.GetMouseButtonUp(0) && currentUnit != null)
+        if (Input.GetMouseButtonUp(0) && currentUnit != null && Physics.Raycast(currentUnit.GetRaycastPos(),Vector3.down, out RaycastHit hit, 100) )
         {
-            var unitPos = currentUnit.transform.position;
-            var _roundedUnitPos = new Vector3(
-                Mathf.Round((unitPos.x / _gridSize.x) * _gridSize.x),
-                unitPos.y,
-                Mathf.Round((unitPos.z / _gridSize.z) * _gridSize.z));
-            var isOnBoard = board.MovingArea.Contains(new Vector2(_roundedUnitPos.x, _roundedUnitPos.z));
-            var x = (int)(_roundedUnitPos.x - board.MovingArea.x);
-            var y = (int)(_roundedUnitPos.z - board.MovingArea.y);
-            Unit unitOnNewPosition = null;
-
-            if (isOnBoard)
+            if (hit.collider.CompareTag("Tile"))
             {
-                unitOnNewPosition = board.GetObjectFromBoard(x, y);
-            }
-            else
-            {
-                currentUnit.transform.position = _lastPosition;
-                currentUnit = null;
-                return;
-            }
 
+                var tile = hit.collider.gameObject.GetComponent<Tile>();
+                if (tile.HasUnit() && mergeUnit.MergeTwoUnit(currentUnit, tile.GetUnit()))
+                {
+                    currentUnit.transform.position = tile.transform.position;
+                    tile.SetUnit(currentUnit);
+                    currentUnit.ClearUnitTile();
+                    currentUnit.SetTile(tile);
+                }
+                else if (tile.HasUnit())
+                {
+                    currentUnit.transform.position = _lastPosition;
+                }
+                else
+                {
+                    currentUnit.transform.position = tile.transform.position;
+                    tile.SetUnit(currentUnit);
+                    currentUnit.ClearUnitTile();
+                    currentUnit.SetTile(tile);
+                }
 
-            if (unitOnNewPosition == null || mergeUnit.MergeTwoUnit(currentUnit, unitOnNewPosition))
-            {
-                var coord = currentUnit.GetCoord();
-                board.SetObjectToBoard(coord.x, coord.y, null);
-                board.SetObjectToBoard(x, y, currentUnit);
-                currentUnit.transform.position = _roundedUnitPos;
-                currentUnit.SetCoord(new Vector2Int(x,y));
+                OnMove?.Invoke();
 
             }
             else
@@ -86,4 +80,6 @@ public class UnitMove : MonoBehaviour
             currentUnit = null;
         }
     }
+
+    public Action OnMove;
 }

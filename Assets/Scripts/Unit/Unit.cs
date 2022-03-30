@@ -6,9 +6,10 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour
 {
     [SerializeField] protected Animator _animator;
-    [SerializeField] protected GameObject _mesh;
+    [SerializeField] protected Transform _raycastPos;
     public enum UnitType { range, melee }
 
+    protected Tile _unitTile;
     protected Vector2Int _coord;
     protected UnitType _unitType;
     protected NavMeshAgent _agent;
@@ -24,13 +25,16 @@ public class Unit : MonoBehaviour
     protected Fight _fight;
     protected EnemySpawner _enemySpawner;
 
+    public void SetTile(Tile tile) { _unitTile = tile; }
+    public Tile GetTile() => _unitTile;
+
     public void SetEnemySpawner(EnemySpawner enemySpawner) { _enemySpawner = enemySpawner; }
     public void SetFight(Fight fight) { _fight = fight; }
 
+    public Vector3 GetRaycastPos() => _raycastPos.position;
     public float GetHealth() => _health;
     public int GetLevel() => _level;
     public void SetLevel(int level) { _level = level; }
-    public void LevelUp() { _level++; OnLevelUp?.Invoke(); }
 
     public Vector2Int GetCoord() => _coord;
     public void SetCoord(Vector2Int coord) { _coord = coord; }
@@ -137,6 +141,8 @@ public class Unit : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void ClearUnitTile() { _unitTile.SetUnit(null); }
+    public void LevelUp() { _level++; OnLevelUp?.Invoke(); }
 
     public Action OnGetDamage;
     public Action OnDealDamage;

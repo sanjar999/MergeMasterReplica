@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,22 +9,16 @@ public class UnitSpawner : MonoBehaviour
     [SerializeField] EnemySpawner _enemySpawner;
     [SerializeField] Unit[] _unitTypes;
     [SerializeField] Button _spawnButton;
-    [SerializeField] Board _board;
+    [SerializeField] TileSpawner _tileSpawner;
     [SerializeField] Transform _parent;
 
-    [SerializeField] float _unitXOffset;
-    [SerializeField] float _unitZOffset;
-    [SerializeField] float _unitOffsetXStep = 2f;
-    [SerializeField] float _unitOffsetZStep = 1.5f;
-
-    [SerializeField] float _startXPos = -4f;
-    [SerializeField] float _startZPos = -7f;
-
-    public List<Unit> GetUnits() => _board.GetUnits();
+    private List<Unit> _units = new List<Unit>();
+    private List<Tile> _tiles = new List<Tile>();
+    public List<Unit> GetUnits() => _units;
 
     public bool HasUnit()
     {
-        foreach (var enemy in _board.GetUnits())
+        foreach (var enemy in _units)
         {
             if (enemy != null)
             {
@@ -39,46 +34,38 @@ public class UnitSpawner : MonoBehaviour
     }
     private void Start()
     {
-        //RestoreProgress();
+        _tiles = _tileSpawner.GetTiles();
+        RestoreProgress();
     }
-
 
     private void SpawnUnit()
     {
-        for (int x = 0; x < (int)_board.MovingArea.width; x++)
+
+        var randomTile = _tiles[UnityEngine.Random.Range(0, _tiles.Count)];
+
+        if (_tileSpawner.HasEmptyTile() && randomTile.HasUnit())
+            SpawnUnit();
+        else if(!_tileSpawner.HasEmptyTile())
         {
-            print(x);
-            _unitXOffset = _unitOffsetXStep * x;
-            for (int y = 0; y < (int)_board.MovingArea.height; y++)
-            {
-                print(y);
-
-                var unit = _board.GetObjectFromBoard(x, y);
-                if (unit == null)
-                {
-                    if (y==0)
-                        _unitZOffset = 0;
-
-                    _unitZOffset += _unitOffsetZStep;
-                    int randomUnitIndex = Random.Range(0, _unitTypes.Length);
-                    var instance = Instantiate(_unitTypes[randomUnitIndex]);
-
-                    _board.SetObjectToBoard(x, y, instance);
-
-                    //setting index off spawned unit
-                    instance.SetCoord(new Vector2Int(x,y));
-                    instance.SetUnitType((Unit.UnitType)randomUnitIndex);
-                    instance.SetFight(_fight);
-                    instance.SetEnemySpawner(_enemySpawner);
-                    _board.AddUnit(instance);
-
-                    //var yHalfScale = instance.transform.localScale.y * 0.5f;
-                    //index to position
-                    instance.transform.position = new Vector3( _startXPos + _unitXOffset, transform.position.y,_startZPos + _unitZOffset);
-                    return;
-                }
-            }
+            return;
         }
+        else
+        {
+            int randomUnitIndex = UnityEngine.Random.Range(0, _unitTypes.Length);
+            var instance = Instantiate(_unitTypes[randomUnitIndex]);
+            _units.Add(instance);
+            randomTile.SetUnit(instance);
+
+            instance.SetUnitType((Unit.UnitType)randomUnitIndex);
+            instance.SetFight(_fight);
+            instance.SetEnemySpawner(_enemySpawner);
+            instance.SetCoord(randomTile.GetCoord());
+            instance.SetTile(randomTile);
+            instance.transform.position = randomTile.transform.position;
+        }
+
+        OnSpawn?.Invoke();
+
     }
 
     private void RestoreProgress()
@@ -88,25 +75,25 @@ public class UnitSpawner : MonoBehaviour
         {
 
             var unitLevel = PlayerPrefs.GetInt($"units_{i}_level");
-            var unitXCoord = PlayerPrefs.GetInt($"units_{i}_x");
-            var unitYCoord = PlayerPrefs.GetInt($"units_{i}_y");
+            var unitTileX = PlayerPrefs.GetInt($"unitTile_{i}_x");
+            var unitTileY = PlayerPrefs.GetInt($"unitTile_{i}_y");
             var unitType = PlayerPrefs.GetInt($"units_{i}_type");
             var instance = Instantiate(_unitTypes[unitType]);
-
-            _board.SetObjectToBoard(unitXCoord, unitYCoord, instance);
+            _units.Add(instance);
 
             //setting index off spawned unit
-            instance.SetCoord(new Vector2Int(unitXCoord,unitYCoord));
             instance.SetLevel(unitLevel);
             instance.SetUnitType((Unit.UnitType)unitType);
             instance.SetFight(_fight);
             instance.SetEnemySpawner(_enemySpawner);
 
-            _board.AddUnit(instance);
-
-            var yHalfScale = instance.transform.localScale.y * 0.5f;
+            var unitTile = _tileSpawner.GetTiles()[unitTileY + 4 * unitTileX];
+            unitTile.SetUnit(instance);
+            instance.SetTile(unitTile);
             //index to position
-            instance.transform.position = new Vector3(unitXCoord + _board.MovingArea.x, yHalfScale, unitYCoord + _board.MovingArea.y);
+            instance.transform.position = unitTile.transform.position;
         }
     }
+
+    public Action OnSpawn;
 }
