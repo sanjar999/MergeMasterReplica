@@ -20,6 +20,7 @@ public class TileSpawner : MonoBehaviour
     private List<Tile> _tiles = new List<Tile>();
 
     public List<Tile> GetTiles() => _tiles;
+    public int GetHeight() => _boardHeight;
 
     private void Start()
     {

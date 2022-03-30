@@ -865,7 +865,6 @@ MonoBehaviour:
   - {fileID: 4497821541812180762, guid: 4a285439db70c47d88415524ea3a3b70, type: 3}
   _spawnButton: {fileID: 2077834946}
   _tileSpawner: {fileID: 1180126793}
-  _board: {fileID: 1180126786}
   _parent: {fileID: 727477959}
 --- !u!114 &1180126788
 MonoBehaviour:
@@ -879,6 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c54f650e6ea4d3fa24bd76f957a978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unitSpawner: {fileID: 1180126787}
 --- !u!114 &1180126789
 MonoBehaviour:
   m_ObjectHideFlags: 0

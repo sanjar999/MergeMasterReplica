@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MergeUnit : MonoBehaviour
 {
+    [SerializeField] UnitSpawner _unitSpawner;
 
     public bool MergeTwoUnit(Unit unit_1, Unit unit_2)
     {
@@ -11,7 +12,8 @@ public class MergeUnit : MonoBehaviour
             return false;
 
         unit_1.LevelUp();
-
+        unit_2.ClearUnitTile();
+        _unitSpawner.GetUnits().Remove(unit_2);
         Destroy(unit_2.gameObject);
         return true;
     }

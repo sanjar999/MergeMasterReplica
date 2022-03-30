@@ -59,7 +59,7 @@ public class UnitSpawner : MonoBehaviour
             instance.SetUnitType((Unit.UnitType)randomUnitIndex);
             instance.SetFight(_fight);
             instance.SetEnemySpawner(_enemySpawner);
-            instance.SetCoord(randomTile.GetCoord());
+            //instance.SetCoord(randomTile.GetCoord());
             instance.SetTile(randomTile);
             instance.transform.position = randomTile.transform.position;
         }
@@ -87,7 +87,7 @@ public class UnitSpawner : MonoBehaviour
             instance.SetFight(_fight);
             instance.SetEnemySpawner(_enemySpawner);
 
-            var unitTile = _tileSpawner.GetTiles()[unitTileY + 4 * unitTileX];
+            var unitTile = _tileSpawner.GetTiles()[unitTileY + _tileSpawner.GetHeight() * unitTileX];
             unitTile.SetUnit(instance);
             instance.SetTile(unitTile);
             //index to position

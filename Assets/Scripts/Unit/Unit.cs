@@ -10,7 +10,7 @@ public class Unit : MonoBehaviour
     public enum UnitType { range, melee }
 
     protected Tile _unitTile;
-    protected Vector2Int _coord;
+    //protected Vector2Int _coord;
     protected UnitType _unitType;
     protected NavMeshAgent _agent;
     protected Transform  _target;
@@ -36,8 +36,8 @@ public class Unit : MonoBehaviour
     public int GetLevel() => _level;
     public void SetLevel(int level) { _level = level; }
 
-    public Vector2Int GetCoord() => _coord;
-    public void SetCoord(Vector2Int coord) { _coord = coord; }
+    //public Vector2Int GetCoord() => _coord;
+    //public void SetCoord(Vector2Int coord) { _coord = coord; }
 
     public UnitType GetUnitType() => _unitType;
     public void SetUnitType(UnitType unitType) { _unitType = unitType; }
