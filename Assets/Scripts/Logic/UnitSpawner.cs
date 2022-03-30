@@ -11,6 +11,14 @@ public class UnitSpawner : MonoBehaviour
     [SerializeField] Board _board;
     [SerializeField] Transform _parent;
 
+    [SerializeField] float _unitXOffset;
+    [SerializeField] float _unitZOffset;
+    [SerializeField] float _unitOffsetXStep = 2f;
+    [SerializeField] float _unitOffsetZStep = 1.5f;
+
+    [SerializeField] float _startXPos = -4f;
+    [SerializeField] float _startZPos = -7f;
+
     public List<Unit> GetUnits() => _board.GetUnits();
 
     public bool HasUnit()
@@ -31,19 +39,27 @@ public class UnitSpawner : MonoBehaviour
     }
     private void Start()
     {
-        RestoreProgress();
+        //RestoreProgress();
     }
+
 
     private void SpawnUnit()
     {
         for (int x = 0; x < (int)_board.MovingArea.width; x++)
         {
+            print(x);
+            _unitXOffset = _unitOffsetXStep * x;
             for (int y = 0; y < (int)_board.MovingArea.height; y++)
             {
+                print(y);
+
                 var unit = _board.GetObjectFromBoard(x, y);
                 if (unit == null)
                 {
+                    if (y==0)
+                        _unitZOffset = 0;
 
+                    _unitZOffset += _unitOffsetZStep;
                     int randomUnitIndex = Random.Range(0, _unitTypes.Length);
                     var instance = Instantiate(_unitTypes[randomUnitIndex]);
 
@@ -56,9 +72,9 @@ public class UnitSpawner : MonoBehaviour
                     instance.SetEnemySpawner(_enemySpawner);
                     _board.AddUnit(instance);
 
-                    var yHalfScale = instance.transform.localScale.y * 0.5f;
+                    //var yHalfScale = instance.transform.localScale.y * 0.5f;
                     //index to position
-                    instance.transform.position = new Vector3(x + _board.MovingArea.x, yHalfScale, y + _board.MovingArea.y);
+                    instance.transform.position = new Vector3( _startXPos + _unitXOffset, transform.position.y,_startZPos + _unitZOffset);
                     return;
                 }
             }

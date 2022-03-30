@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -37,19 +36,10 @@ public class Enemy : MonoBehaviour
     public void SetUnitType(EnemyType enemyType) { _enemyType = enemyType; }
 
     private float damageOffset = 0;
+    private List<Unit> _enemies;
 
     public float GetHealth() => _health;
 
-    public void GetDamage(float amount)
-    {
-        _health -= amount;
-        OnGetDamage?.Invoke();
-        if (_health<=0)
-        {
-            Destroy(gameObject);
-        }
-
-    }
 
     private void Start()
     {
@@ -57,7 +47,7 @@ public class Enemy : MonoBehaviour
             _fight.OnFight += () => _isFight = true;
 
         _agent = GetComponent<NavMeshAgent>();
-
+        _enemies = _unitSpawner.GetUnits();
     }
     private void OnDisable()
     {
@@ -75,7 +65,6 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Attack()
     {
-        var enemies = _unitSpawner.GetUnits();
         damageOffset += Time.deltaTime;
 
         if (!_unitSpawner.HasUnit())
@@ -85,7 +74,7 @@ public class Enemy : MonoBehaviour
         }
 
         if (!_target)
-            _target = GetCloseEnemy(enemies).gameObject.transform;
+            _target = GetCloseEnemy(_enemies).gameObject.transform;
         else
         {
             _agent.SetDestination(_target.position);
@@ -96,6 +85,9 @@ public class Enemy : MonoBehaviour
                 DealDamage(_target.GetComponent<Unit>(), _damage * _level);
             }
         }
+
+        transform.LookAt(new Vector3(_target.position.x, transform.position.y, _target.position.z));
+
     }
 
     public Unit GetCloseEnemy(List<Unit> enemies)
@@ -117,6 +109,17 @@ public class Enemy : MonoBehaviour
     {
         target.GetDamage(amount);
         OnDealDamage?.Invoke();
+
+    }
+
+    public void GetDamage(float amount)
+    {
+        _health -= amount;
+        OnGetDamage?.Invoke();
+        if (_health<=0)
+        {
+            Destroy(gameObject);
+        }
 
     }
 

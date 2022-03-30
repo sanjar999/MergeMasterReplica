@@ -11,6 +11,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Transform _parent;
     [SerializeField] int _enemyAmount;
 
+    [SerializeField] float _enemyXOffsef;
+    [SerializeField] float _enemyZOffsef;
+    [SerializeField] float _enemyOffsetStep;
+
     public List<Enemy> GetEnemies() => _enemyBoard.GetEnemies();
 
     private void Start()

@@ -5,6 +5,7 @@ public class UnitMove : MonoBehaviour
     [SerializeField] Transform _planePosition;
     [SerializeField] Board _board;
     [SerializeField] MergeUnit _mergeUnit;
+    [SerializeField] Vector3 _gridSize;
     Vector3 _lastPosition;
     Unit _currentUnit;
     Camera _cam;
@@ -48,7 +49,10 @@ public class UnitMove : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && currentUnit != null)
         {
             var unitPos = currentUnit.transform.position;
-            var _roundedUnitPos = new Vector3(Mathf.RoundToInt(unitPos.x), unitPos.y, Mathf.RoundToInt(unitPos.z));
+            var _roundedUnitPos = new Vector3(
+                Mathf.Round((unitPos.x / _gridSize.x) * _gridSize.x),
+                unitPos.y,
+                Mathf.Round((unitPos.z / _gridSize.z) * _gridSize.z));
             var isOnBoard = board.MovingArea.Contains(new Vector2(_roundedUnitPos.x, _roundedUnitPos.z));
             var x = (int)(_roundedUnitPos.x - board.MovingArea.x);
             var y = (int)(_roundedUnitPos.z - board.MovingArea.y);

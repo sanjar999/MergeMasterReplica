@@ -64,6 +64,7 @@ public class Unit : MonoBehaviour
         {
             Attack();
         }
+
         _animator.SetFloat("Blend", _agent.velocity.magnitude);
 
     }
@@ -101,7 +102,7 @@ public class Unit : MonoBehaviour
 
             }
         }
-        transform.LookAt(new Vector3(_target.position.x, 0, _target.position.z));
+        transform.LookAt(new Vector3(_target.position.x, transform.position.y, _target.position.z));
     }
 
     public Enemy GetCloseEnemy(List<Enemy> enemies)
@@ -140,5 +141,4 @@ public class Unit : MonoBehaviour
     public Action OnGetDamage;
     public Action OnDealDamage;
     public Action OnLevelUp;
-
 }

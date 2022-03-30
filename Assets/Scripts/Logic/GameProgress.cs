@@ -13,7 +13,7 @@ public class GameProgress : MonoBehaviour
 
     private void OnDisable()
     {
-        SaveData();
+        //SaveData();
     }
 
     private void SaveData()
