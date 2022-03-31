@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Unit : MonoBehaviour
+public class Unit : Creature
 {
     [SerializeField] protected Animator _animator;
     [SerializeField] protected Transform _raycastPos;
@@ -52,8 +52,6 @@ public class Unit : MonoBehaviour
 
         _agent = GetComponent<NavMeshAgent>();
         _enemies = _enemySpawner.GetEnemies();
-
-
     }
     private void OnDisable()
     {
@@ -141,7 +139,7 @@ public class Unit : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void ClearUnitTile() { _unitTile.SetUnit(null); }
+    public void ClearUnitTile() { _unitTile.SetCreature(null); }
     public void LevelUp() { _level++; OnLevelUp?.Invoke(); }
 
     public Action OnGetDamage;

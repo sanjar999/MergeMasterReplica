@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Fight : MonoBehaviour
 {
     [SerializeField] Button _fightBtn;
-    [SerializeField] Board _board;
+    [SerializeField] UnitSpawner _unitSpawner;
 
     void Start()
     {
@@ -15,7 +15,7 @@ public class Fight : MonoBehaviour
     private void StartFight()
     {
         OnFight?.Invoke();
-        foreach (var unit in _board.GetUnits())
+        foreach (var unit in _unitSpawner.GetUnits())
         {
             unit.StartFightAnim();
 

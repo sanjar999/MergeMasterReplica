@@ -11,10 +11,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Transform _parent;
     [SerializeField] int _enemyAmount;
 
-    [SerializeField] float _enemyXOffsef;
-    [SerializeField] float _enemyZOffsef;
-    [SerializeField] float _enemyOffsetStep;
-
     public List<Enemy> GetEnemies() => _enemyBoard.GetEnemies();
 
     private void Start()
@@ -43,12 +39,12 @@ public class EnemySpawner : MonoBehaviour
             if (_enemyBoard.GetObjectFromBoard(x, y) == null)
             {
                 var instance = Instantiate(_enemyTypes[0]);
-                instance.SetCoord(new Vector2Int(x,y));
+                instance.SetCoord(new Vector2Int(x, y));
                 instance.SetFight(_fight);
                 instance.SetUnitSpawner(_unitSpawner);
                 instance.transform.parent = _parent;
-                instance.transform.position = new Vector3(x+(int)_enemyBoard.MovingArea.x, 1 , y + (int)_enemyBoard.MovingArea.y );
-                _enemyBoard.SetObjectToBoard(x,y, instance);
+                instance.transform.position = new Vector3(x + (int)_enemyBoard.MovingArea.x, 1, y + (int)_enemyBoard.MovingArea.y);
+                _enemyBoard.SetObjectToBoard(x, y, instance);
                 _enemyBoard.AddEnemy(instance);
                 amount--;
             }

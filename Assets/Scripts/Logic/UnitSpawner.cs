@@ -54,7 +54,7 @@ public class UnitSpawner : MonoBehaviour
             int randomUnitIndex = UnityEngine.Random.Range(0, _unitTypes.Length);
             var instance = Instantiate(_unitTypes[randomUnitIndex]);
             _units.Add(instance);
-            randomTile.SetUnit(instance);
+            randomTile.SetCreature(instance);
 
             instance.SetUnitType((Unit.UnitType)randomUnitIndex);
             instance.SetFight(_fight);
@@ -91,7 +91,7 @@ public class UnitSpawner : MonoBehaviour
 
             var unitTile = _tileSpawner.GetTiles()[unitTileY + _tileSpawner.GetHeight() * unitTileX];
 
-            unitTile.SetUnit(instance);
+            unitTile.SetCreature(instance);
             instance.SetTile(unitTile);
             //index to position
             instance.transform.position = unitTile.transform.position;

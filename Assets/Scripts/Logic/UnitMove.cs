@@ -51,10 +51,10 @@ public class UnitMove : MonoBehaviour
             {
 
                 var tile = hit.collider.gameObject.GetComponent<Tile>();
-                if (tile.HasUnit() && mergeUnit.MergeTwoUnit(currentUnit, tile.GetUnit()))
+                if (tile.HasUnit() && mergeUnit.MergeTwoUnit(currentUnit, (Unit)tile.GetCreature()))
                 {
                     currentUnit.transform.position = tile.transform.position;
-                    tile.SetUnit(currentUnit);
+                    tile.SetCreature(currentUnit);
                     currentUnit.ClearUnitTile();
                     currentUnit.SetTile(tile);
                 }
@@ -65,7 +65,7 @@ public class UnitMove : MonoBehaviour
                 else
                 {
                     currentUnit.transform.position = tile.transform.position;
-                    tile.SetUnit(currentUnit);
+                    tile.SetCreature(currentUnit);
                     currentUnit.ClearUnitTile();
                     currentUnit.SetTile(tile);
                 }

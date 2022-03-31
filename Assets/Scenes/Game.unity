@@ -875,13 +875,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1180126784}
   - component: {fileID: 1180126785}
-  - component: {fileID: 1180126786}
   - component: {fileID: 1180126787}
   - component: {fileID: 1180126788}
   - component: {fileID: 1180126789}
   - component: {fileID: 1180126790}
   - component: {fileID: 1180126791}
-  - component: {fileID: 1180126792}
   - component: {fileID: 1180126793}
   m_Layer: 0
   m_Name: WORLD
@@ -924,24 +922,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _planePosition: {fileID: 409183498}
   _mergeUnit: {fileID: 1180126788}
---- !u!114 &1180126786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180126783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a86f74b8b5da4608befa9c97750abd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movingAreaBounds:
-    serializedVersion: 2
-    x: -4
-    y: -4
-    width: 5
-    height: 4
 --- !u!114 &1180126787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1003,7 +983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fightBtn: {fileID: 1980326505}
-  _board: {fileID: 1180126786}
+  _unitSpawner: {fileID: 1180126787}
 --- !u!114 &1180126791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,30 +1000,12 @@ MonoBehaviour:
   - {fileID: 478496546451244917, guid: 97cae1a42ede5442eaf8f4ebe1973ceb, type: 3}
   _fight: {fileID: 1180126790}
   _unitSpawner: {fileID: 1180126787}
-  _enemyBoard: {fileID: 1180126792}
+  _enemyBoard: {fileID: 0}
   _parent: {fileID: 498161699}
   _enemyAmount: 4
   _enemyXOffsef: 0
   _enemyZOffsef: 0
   _enemyOffsetStep: 0
---- !u!114 &1180126792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180126783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a6197b7b45e948caa640d32b808ed8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movingAreaBounds:
-    serializedVersion: 2
-    x: -4
-    y: 1
-    width: 5
-    height: 4
 --- !u!114 &1180126793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1056,7 +1018,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f3e4df3331d420689868f8f5608616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tilePrefab: {fileID: -4226759539688213861, guid: e0f2533b1431148e7a5042d23a523658, type: 3}
+  _greenTilePrefab: {fileID: -4226759539688213861, guid: e0f2533b1431148e7a5042d23a523658, type: 3}
+  _redTilePrefab: {fileID: -4226759539688213861, guid: abc2df2d4644c4acf9addf72ed800524, type: 3}
   _boardWidth: 5
   _boardHeight: 4
   _tileXOffset: 0
