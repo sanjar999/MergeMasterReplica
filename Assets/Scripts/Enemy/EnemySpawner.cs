@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,11 +60,13 @@ public class EnemySpawner : MonoBehaviour
 
     private Tile GetRandomMeleeTile(List<Tile> tiles, TileSpawner tileSpawner)
     {
-        return tiles[Random.Range(0, 2) + (tileSpawner.GetWidth() - 1) * Random.Range(0, tileSpawner.GetHeight())];
+        return tiles[UnityEngine.Random.Range(0, 2) + (tileSpawner.GetWidth() - 1) * UnityEngine.Random.Range(0, tileSpawner.GetHeight())];
     }
 
     private Tile GetRandomRangedTile(List<Tile> tiles, TileSpawner tileSpawner)
     {
-        return tiles[Random.Range(2, 4) + (tileSpawner.GetWidth() - 1) * Random.Range(0, tileSpawner.GetHeight())];
+        return tiles[UnityEngine.Random.Range(2, 4) + (tileSpawner.GetWidth() - 1) * UnityEngine.Random.Range(0, tileSpawner.GetHeight())];
     }
+    public Action OnSpawn;
+
 }

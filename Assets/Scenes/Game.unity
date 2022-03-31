@@ -935,12 +935,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fight: {fileID: 1180126790}
-  _enemySpawner: {fileID: 1180126791}
   _unitTypes:
   - {fileID: 2493235241905999362, guid: 74bc15226c0db402b9f7460bbe16713b, type: 3}
   - {fileID: 4497821541812180762, guid: 4a285439db70c47d88415524ea3a3b70, type: 3}
-  _spawnButton: {fileID: 2077834946}
+  _enemySpawner: {fileID: 1180126791}
   _tileSpawner: {fileID: 1180126793}
+  _spawnButton: {fileID: 2077834946}
   _parent: {fileID: 727477959}
 --- !u!114 &1180126788
 MonoBehaviour:
@@ -996,9 +996,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78b25efaa9df451eb56e950a332c8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fight: {fileID: 1180126790}
   _enemyTypes:
   - {fileID: 478496546451244917, guid: 97cae1a42ede5442eaf8f4ebe1973ceb, type: 3}
-  _fight: {fileID: 1180126790}
   _unitSpawner: {fileID: 1180126787}
   _tileSpawner: {fileID: 1180126793}
   _parent: {fileID: 498161699}

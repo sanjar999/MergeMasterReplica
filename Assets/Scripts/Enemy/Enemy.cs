@@ -16,17 +16,18 @@ public class Enemy : Creature
 
     private void Start()
     {
-        if (_fight)
-            _fight.OnFight += () => _isFight = true;
+        _fight.OnFight += () => _isFight = true;
+        _unitSpawner.OnSpawn += GetEnemies;
 
         _agent = GetComponent<NavMeshAgent>();
-        _enemies = _unitSpawner.GetUnits().ConvertAll(new Converter<Unit, Creature>(CreatureToUnit));
+        GetEnemies();
     }
 
     private void OnDisable()
     {
-        if (_fight)
-            _fight.OnFight -= () => _isFight = true;
+        _fight.OnFight -= () => _isFight = true;
+        _unitSpawner.OnSpawn -= GetEnemies;
+
     }
 
     private void Update()
@@ -36,7 +37,7 @@ public class Enemy : Creature
     }
 
     private Unit CreatureToUnit(Creature c) => c as Unit;
-
+    private void GetEnemies() { _enemies = _unitSpawner.GetUnits().ConvertAll(new Converter<Unit, Creature>(CreatureToUnit)); }
     protected override void Attack()
     {
         if (!_unitSpawner.HasUnit)

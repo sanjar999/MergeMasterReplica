@@ -23,18 +23,16 @@ public class Unit : Creature
 
     private void Start()
     {
-        if (_fight)
-            _fight.OnFight += () => _isFight = true;
-
+        _fight.OnFight += () => _isFight = true;
+        _enemySpawner.OnSpawn += GetEnemies;
         _agent = GetComponent<NavMeshAgent>();
-        _enemies = _enemySpawner.GetEnemies().ConvertAll(new Converter<Enemy, Creature>(CreatureToUnit));
+        GetEnemies();
     }
 
     private void OnDisable()
     {
-        if (_fight)
-            _fight.OnFight -= () => _isFight = true;
-
+        _fight.OnFight -= () => _isFight = true;
+        _enemySpawner.OnSpawn -= GetEnemies;
     }
 
     private void Update()
@@ -43,6 +41,7 @@ public class Unit : Creature
             Attack();
         _animator.SetFloat("Blend", _agent.velocity.magnitude);
     }
+    private void GetEnemies() { _enemies = _enemySpawner.GetEnemies().ConvertAll(new Converter<Enemy, Creature>(CreatureToUnit)); }
 
     protected override void Attack()
     {
