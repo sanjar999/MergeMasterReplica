@@ -87,7 +87,10 @@ public class UnitSpawner : MonoBehaviour
             instance.SetFight(_fight);
             instance.SetEnemySpawner(_enemySpawner);
 
+            //print(unitTileY + _tileSpawner.GetHeight() * unitTileX);
+
             var unitTile = _tileSpawner.GetTiles()[unitTileY + _tileSpawner.GetHeight() * unitTileX];
+
             unitTile.SetUnit(instance);
             instance.SetTile(unitTile);
             //index to position
