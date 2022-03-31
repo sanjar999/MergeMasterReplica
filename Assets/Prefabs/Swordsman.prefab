@@ -2223,10 +2223,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8802984913825518183}
   - component: {fileID: 8802984913816501729}
-  - component: {fileID: 3814609155727936652}
   - component: {fileID: 4497821541812180762}
-  - component: {fileID: 2627992879889037899}
-  - component: {fileID: 601653139223392681}
+  - component: {fileID: 3814609155727936652}
   - component: {fileID: 1079860201582976481}
   m_Layer: 0
   m_Name: Swordsman
@@ -2273,21 +2271,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3814609155727936652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8802984913825877895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebb1770c289a04dd7921e0759f996ef0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvas: {fileID: 5033356603689158207}
-  _levelText: {fileID: 8472578371639698028}
-  _creature: {fileID: 4497821541812180762}
 --- !u!114 &4497821541812180762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2303,7 +2286,7 @@ MonoBehaviour:
   _health: 80
   _animator: {fileID: 8802984913816501729}
   _raycastPos: {fileID: 6453829626171600074}
---- !u!114 &2627992879889037899
+--- !u!114 &3814609155727936652
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2312,24 +2295,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8802984913825877895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41658b84f4830470aab0f295301aaef1, type: 3}
+  m_Script: {fileID: 11500000, guid: ebb1770c289a04dd7921e0759f996ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 5033356603689158207}
---- !u!114 &601653139223392681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8802984913825877895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b305c4f807c574684bd465573b315d77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _creature: {fileID: 4497821541812180762}
+  _levelText: {fileID: 8472578371639698028}
   _healthSlider: {fileID: 2651555161842990885}
+  _creature: {fileID: 4497821541812180762}
 --- !u!195 &1079860201582976481
 NavMeshAgent:
   m_ObjectHideFlags: 0
