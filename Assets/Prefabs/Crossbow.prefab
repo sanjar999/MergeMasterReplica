@@ -2454,7 +2454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 766923596518881008}
   _levelText: {fileID: 4239396903511485958}
-  _unit: {fileID: 2493235241905999362}
+  _creature: {fileID: 2493235241905999362}
 --- !u!114 &2493235241905999362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2467,6 +2467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d61d281699c5472bae58b5ec9fed3ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: 80
   _animator: {fileID: 8833871630707627810}
   _raycastPos: {fileID: 8887487957590486396}
 --- !u!114 &2493235241905999367
@@ -2494,7 +2495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b305c4f807c574684bd465573b315d77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unit: {fileID: 2493235241905999362}
+  _creature: {fileID: 2493235241905999362}
   _healthSlider: {fileID: 1705548828764652214}
 --- !u!195 &2493235241905999364
 NavMeshAgent:

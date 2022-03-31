@@ -5,17 +5,17 @@ public class LevelIndicator : MonoBehaviour
 {
     [SerializeField] Canvas _canvas;
     [SerializeField] TMP_Text _levelText;
-    [SerializeField] Unit _unit;
+    [SerializeField] Creature _creature;
 
 
     private void OnEnable()
     {
-        _unit.OnLevelUp += UpdateLevel;
+        _creature.OnLevelUp += UpdateLevel;
     }
 
     private void OnDisable()
     {
-        _unit.OnLevelUp -= UpdateLevel;
+        _creature.OnLevelUp -= UpdateLevel;
     }
 
     private void Start()
@@ -26,6 +26,6 @@ public class LevelIndicator : MonoBehaviour
 
     private void UpdateLevel()
     {
-        _levelText.text = _unit.GetLevel().ToString();
+        _levelText.text = _creature.GetLevel().ToString();
     }
 }
