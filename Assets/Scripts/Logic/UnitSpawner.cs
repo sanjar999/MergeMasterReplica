@@ -6,34 +6,30 @@ using UnityEngine.UI;
 public class UnitSpawner : MonoBehaviour
 {
     [SerializeField] Fight _fight;
-    [SerializeField] EnemySpawner _enemySpawner;
     [SerializeField] Unit[] _unitTypes;
-    [SerializeField] Button _spawnButton;
+    [SerializeField] EnemySpawner _enemySpawner;
     [SerializeField] TileSpawner _tileSpawner;
+    [SerializeField] Button _spawnButton;
     [SerializeField] Transform _parent;
 
     private List<Unit> _units = new List<Unit>();
     private List<Tile> _tiles = new List<Tile>();
     public List<Unit> GetUnits() => _units;
 
-    public bool HasUnit()
+    public bool HasUnit
     {
-        foreach (var enemy in _units)
+        get
         {
-            if (enemy != null)
-            {
-                return true;
-            }
+            foreach (var enemy in _units)
+                if (enemy != null)
+                    return true;
+            return false;
         }
-        return false;
     }
 
-    private void Awake()
-    {
-        _spawnButton.onClick.AddListener(SpawnUnit);
-    }
     private void Start()
     {
+        _spawnButton.onClick.AddListener(SpawnUnit);
         _tiles = _tileSpawner.GetTiles();
         RestoreProgress();
     }
@@ -43,29 +39,28 @@ public class UnitSpawner : MonoBehaviour
 
         var randomTile = _tiles[UnityEngine.Random.Range(0, _tiles.Count)];
 
-        if (_tileSpawner.HasEmptyTile() && randomTile.HasUnit())
-            SpawnUnit();
-        else if(!_tileSpawner.HasEmptyTile())
+        if (!_tileSpawner.HasEmptyTile() || !randomTile.HasUnit())
         {
-            return;
-        }
-        else
-        {
-            int randomUnitIndex = UnityEngine.Random.Range(0, _unitTypes.Length);
-            var instance = Instantiate(_unitTypes[randomUnitIndex]);
-            _units.Add(instance);
-            randomTile.SetCreature(instance);
+            if (!_tileSpawner.HasEmptyTile())
+                return;
+            else
+            {
+                int randomUnitIndex = UnityEngine.Random.Range(0, _unitTypes.Length);
+                var instance = Instantiate(_unitTypes[randomUnitIndex]);
+                _units.Add(instance);
+                randomTile.SetCreature(instance);
 
-            instance.SetUnitType((Unit.UnitType)randomUnitIndex);
-            instance.SetFight(_fight);
-            instance.SetEnemySpawner(_enemySpawner);
-            //instance.SetCoord(randomTile.GetCoord());
-            instance.SetTile(randomTile);
-            instance.transform.position = randomTile.transform.position;
+                instance.SetUnitType((Unit.UnitType)randomUnitIndex);
+                instance.SetFight(_fight);
+                instance.SetEnemySpawner(_enemySpawner);
+                //instance.SetCoord(randomTile.GetCoord());
+                instance.SetTile(randomTile);
+                instance.transform.position = randomTile.transform.position;
+            }
         }
+        else SpawnUnit();
 
         OnSpawn?.Invoke();
-
     }
 
     private void RestoreProgress()

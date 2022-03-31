@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +25,7 @@ public class TileSpawner : MonoBehaviour
     public List<Tile> GetTiles() => _greenTiles;
     public List<Tile> GetRedTiles() => _redTiles;
     public int GetHeight() => _boardHeight;
+    public int GetWidth() => _boardWidth;
 
     private void Start()
     {
@@ -36,24 +36,16 @@ public class TileSpawner : MonoBehaviour
     public bool HasEmptyTile()
     {
         foreach (var tile in _greenTiles)
-        {
             if (!tile.HasUnit())
-            {
                 return true;
-            }
-        }
         return false;
     }
 
     public bool HasEmptyRedTile()
     {
         foreach (var tile in _redTiles)
-        {
             if (!tile.HasUnit())
-            {
                 return true;
-            }
-        }
         return false;
     }
 
@@ -69,7 +61,7 @@ public class TileSpawner : MonoBehaviour
                 _tileZOffset += _tileOffsetZStep;
 
                 var instance = Instantiate(tile);
-                instance.SetCoord(x,y);
+                instance.SetCoord(x, y);
                 tileHolder.Add(instance);
                 //index to position
                 instance.transform.position = new Vector3(_startXPos + _tileXOffset,

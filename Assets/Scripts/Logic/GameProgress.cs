@@ -25,8 +25,6 @@ public class GameProgress : MonoBehaviour
 
     private void SaveData()
     {
-        print("Save");
-
         PlayerPrefs.SetInt("units_count", _units.Count);
 
         for (int i = 0; i < _units.Count; i++)

@@ -20,7 +20,7 @@ public class UnitMove : MonoBehaviour
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
 
         MovingUnit(ray, _plane, _currentUnit);
-        SelectUnit(ray,ref _currentUnit,ref _lastPosition);
+        SelectUnit(ray, ref _currentUnit, ref _lastPosition);
         UnselectUnit(ref _currentUnit, _mergeUnit);
     }
 
@@ -35,7 +35,7 @@ public class UnitMove : MonoBehaviour
         }
     }
 
-    private void SelectUnit(Ray ray,ref Unit currentUnit,ref Vector3 lastPosition)
+    private void SelectUnit(Ray ray, ref Unit currentUnit, ref Vector3 lastPosition)
     {
         if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out RaycastHit hit, 1000) && hit.collider.CompareTag("Unit"))
         {
@@ -45,7 +45,7 @@ public class UnitMove : MonoBehaviour
     }
     private void UnselectUnit(ref Unit currentUnit, MergeUnit mergeUnit)
     {
-        if (Input.GetMouseButtonUp(0) && currentUnit != null && Physics.Raycast(currentUnit.GetRaycastPos(),Vector3.down, out RaycastHit hit, 100) )
+        if (Input.GetMouseButtonUp(0) && currentUnit != null && Physics.Raycast(currentUnit.GetRaycastPos(), Vector3.down, out RaycastHit hit, 100))
         {
             if (hit.collider.CompareTag("Tile"))
             {
@@ -59,9 +59,7 @@ public class UnitMove : MonoBehaviour
                     currentUnit.SetTile(tile);
                 }
                 else if (tile.HasUnit())
-                {
                     currentUnit.transform.position = _lastPosition;
-                }
                 else
                 {
                     currentUnit.transform.position = tile.transform.position;
@@ -74,9 +72,7 @@ public class UnitMove : MonoBehaviour
 
             }
             else
-            {
                 currentUnit.transform.position = _lastPosition;
-            }
             currentUnit = null;
         }
     }
