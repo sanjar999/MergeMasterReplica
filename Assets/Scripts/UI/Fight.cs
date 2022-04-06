@@ -6,6 +6,7 @@ public class Fight : MonoBehaviour
 {
     [SerializeField] Button _fightBtn;
     [SerializeField] UnitSpawner _unitSpawner;
+    [SerializeField] EnemySpawner _enemySpawner;
 
     void Start()
     {
@@ -18,7 +19,10 @@ public class Fight : MonoBehaviour
         foreach (var unit in _unitSpawner.GetUnits())
         {
             unit.StartFightAnim();
-
+        }
+        foreach (var enemy in _enemySpawner.GetEnemies())
+        {
+            enemy.StartFightAnim();
         }
     }
 

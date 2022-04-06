@@ -9,7 +9,8 @@ public class UnitSpawner : MonoBehaviour
     [SerializeField] Unit[] _unitTypes;
     [SerializeField] EnemySpawner _enemySpawner;
     [SerializeField] TileSpawner _tileSpawner;
-    [SerializeField] Button _spawnButton;
+    [SerializeField] Button _spawnMelee;
+    [SerializeField] Button _spawnRange;
     [SerializeField] Transform _parent;
 
     private List<Unit> _units = new List<Unit>();
@@ -23,18 +24,20 @@ public class UnitSpawner : MonoBehaviour
             foreach (var enemy in _units)
                 if (enemy != null)
                     return true;
+            OnLose?.Invoke();
             return false;
         }
     }
 
     private void Start()
     {
-        _spawnButton.onClick.AddListener(SpawnUnit);
+        _spawnMelee.onClick.AddListener(()=> SpawnUnit(Unit.UnitType.melee));
+        _spawnRange.onClick.AddListener(()=> SpawnUnit(Unit.UnitType.range));
         _tiles = _tileSpawner.GetTiles();
         RestoreProgress();
     }
 
-    private void SpawnUnit()
+    private void SpawnUnit(Unit.UnitType unitType)
     {
 
         var randomTile = _tiles[UnityEngine.Random.Range(0, _tiles.Count)];
@@ -45,12 +48,11 @@ public class UnitSpawner : MonoBehaviour
                 return;
             else
             {
-                int randomUnitIndex = UnityEngine.Random.Range(0, _unitTypes.Length);
-                var instance = Instantiate(_unitTypes[randomUnitIndex]);
+                var instance = Instantiate(_unitTypes[(int)unitType]);
                 _units.Add(instance);
                 randomTile.SetCreature(instance);
 
-                instance.SetUnitType((Unit.UnitType)randomUnitIndex);
+                instance.SetUnitType(unitType);
                 instance.SetFight(_fight);
                 instance.SetEnemySpawner(_enemySpawner);
                 //instance.SetCoord(randomTile.GetCoord());
@@ -58,7 +60,7 @@ public class UnitSpawner : MonoBehaviour
                 instance.transform.position = randomTile.transform.position;
             }
         }
-        else SpawnUnit();
+        else SpawnUnit(unitType);
 
         OnSpawn?.Invoke();
     }
@@ -68,7 +70,6 @@ public class UnitSpawner : MonoBehaviour
         int unitCount = PlayerPrefs.GetInt("units_count", 0);
         for (int i = 0; i < unitCount; i++)
         {
-
             var unitLevel = PlayerPrefs.GetInt($"units_{i}_level");
             var unitTileX = PlayerPrefs.GetInt($"unitTile_{i}_x");
             var unitTileY = PlayerPrefs.GetInt($"unitTile_{i}_y");
@@ -82,8 +83,6 @@ public class UnitSpawner : MonoBehaviour
             instance.SetFight(_fight);
             instance.SetEnemySpawner(_enemySpawner);
 
-            //print(unitTileY + _tileSpawner.GetHeight() * unitTileX);
-
             var unitTile = _tileSpawner.GetTiles()[unitTileY + _tileSpawner.GetHeight() * unitTileX];
 
             unitTile.SetCreature(instance);
@@ -94,4 +93,5 @@ public class UnitSpawner : MonoBehaviour
     }
 
     public Action OnSpawn;
+    public Action OnLose;
 }

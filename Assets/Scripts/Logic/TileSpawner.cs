@@ -17,7 +17,7 @@ public class TileSpawner : MonoBehaviour
     [SerializeField] float _startXPos = -4f;
     [SerializeField] float _startZPos = -7f;
     [SerializeField] float _redStartZPos = -0.75f;
-
+    [SerializeField] Transform _parent;
 
     private List<Tile> _greenTiles = new List<Tile>();
     private List<Tile> _redTiles = new List<Tile>();
@@ -67,6 +67,8 @@ public class TileSpawner : MonoBehaviour
                 instance.transform.position = new Vector3(_startXPos + _tileXOffset,
                                                            instance.transform.position.y,
                                                           startZPos + _tileZOffset);
+
+                instance.transform.parent = _parent;
             }
         }
     }

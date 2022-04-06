@@ -4,13 +4,17 @@ using UnityEngine.AI;
 
 public class Unit : Creature
 {
-    [SerializeField] protected Animator _animator;
     [SerializeField] protected Transform _raycastPos;
+    [SerializeField] protected float _defence = .5f;
+
+    [SerializeField] protected float _lvlUpHpIncrease = 10f;
+    [SerializeField] protected float _lvlUpDefIncrease = .1f;
+    [SerializeField] protected float _lvlUpDmgIncrease = .4f;
+
     public enum UnitType { range, melee }
 
     protected Tile _unitTile;
     protected UnitType _unitType;
-    protected float _defence = 2;
     protected EnemySpawner _enemySpawner;
 
     public void SetTile(Tile tile) { _unitTile = tile; }
@@ -45,7 +49,7 @@ public class Unit : Creature
 
     protected override void Attack()
     {
-        if (!_enemySpawner.HasEnemy)
+        if (!_enemySpawner.GetHasEnemy())
         {
             _agent.isStopped = true;
             _animator.SetBool("isAttack", false);
@@ -53,14 +57,28 @@ public class Unit : Creature
         }
         base.Attack();
     }
+    public override void SetLevel(int level)
+    {
+        base.SetLevel(level);
+        _health = _level * _lvlUpHpIncrease;
+        _damage = _level * _lvlUpDmgIncrease;
+        _defence = _level * _lvlUpDefIncrease;
+    }
+
+    public override void LevelUp()
+    {
+        base.LevelUp();
+        _health = _level * _lvlUpHpIncrease;
+        _defence = _level * _lvlUpDefIncrease;
+        _damage = _level * _lvlUpDmgIncrease;
+    }
 
     public override void GetDamage(float amount)
     {
-        base.GetDamage(amount);
-        _target = GetCloseEnemy(_enemies).gameObject.transform;
+        base.GetDamage(amount - _defence);
+        _target = GetCloseEnemy(_enemies);
     }
 
     private Enemy CreatureToUnit(Creature c) => c as Enemy;
-    public void StartFightAnim() { _animator.SetBool("isAttack", true); }
     public void ClearUnitTile() { _unitTile.SetCreature(null); }
 }
