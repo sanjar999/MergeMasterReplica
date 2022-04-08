@@ -209,6 +209,8 @@ GameObject:
   - component: {fileID: 3860728325606764920}
   - component: {fileID: 5792991234707618648}
   - component: {fileID: 5866918267424337786}
+  - component: {fileID: 5629162056309616300}
+  - component: {fileID: 921341832554973052}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Unit
@@ -312,12 +314,41 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1654834086785018470}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.0053562187
-  m_Height: 0.017738342
+  m_Height: 0.018281676
   m_Direction: 2
-  m_Center: {x: -0.000018308163, y: -0.00036583305, z: 0.009536282}
+  m_Center: {x: -0.000018308163, y: -0.00036583305, z: 0.009264659}
+--- !u!54 &5629162056309616300
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654834086785018470}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &921341832554973052
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654834086785018470}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.000016565322, y: 0, z: 0.012754519}
+  m_Center: {x: 0.00032150507, y: 0.00007312023, z: -0.0027010548}
 --- !u!1 &1887406447616720451
 GameObject:
   m_ObjectHideFlags: 0
