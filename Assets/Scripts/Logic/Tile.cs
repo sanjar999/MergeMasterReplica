@@ -24,7 +24,7 @@ public class Tile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var cr = GetCreature();
-        print(cr != other);
+
         if (!HasUnit() && !_isGreen)
         {
             _mat.SetColor("_Color", _mat.GetColor("_Color") + new Color(0, 0, 0, .5f));
@@ -41,3 +41,4 @@ public class Tile : MonoBehaviour
         }
     }
 }
+
