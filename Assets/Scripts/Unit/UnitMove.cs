@@ -19,14 +19,17 @@ public class UnitMove : MonoBehaviour
     {
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
 
-        MovingUnit(ray, _plane, _currentUnit);
-        SelectUnit(ray, ref _currentUnit, ref _lastPosition);
-        UnselectUnit(ref _currentUnit, _mergeUnit);
+        if (_currentUnit !=null)
+            MovingUnit(ray, _plane, _currentUnit);
+        if (Input.GetMouseButtonDown(0))
+            SelectUnit(ray, ref _currentUnit, ref _lastPosition);
+        if (Input.GetMouseButtonUp(0))
+            UnselectUnit(ref _currentUnit, _mergeUnit);
     }
 
     private void MovingUnit(Ray ray, Plane plane, Unit currentUnit)
     {
-        if (plane.Raycast(ray, out float distance) && currentUnit != null)
+        if (plane.Raycast(ray, out float distance))
         {
             var wP = ray.GetPoint(distance);
             var yHalfScale = currentUnit.transform.localScale.y * 0.5f;
@@ -37,16 +40,19 @@ public class UnitMove : MonoBehaviour
 
     private void SelectUnit(Ray ray, ref Unit currentUnit, ref Vector3 lastPosition)
     {
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out RaycastHit hit, 1000) && hit.collider.CompareTag("Unit"))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000) && hit.collider.CompareTag("Unit"))
         {
             currentUnit = hit.collider.gameObject.GetComponentInParent<Unit>();
             lastPosition = currentUnit.transform.position;
+            currentUnit.IsFlying = true;
         }
     }
     private void UnselectUnit(ref Unit currentUnit, MergeUnit mergeUnit)
     {
-        if (Input.GetMouseButtonUp(0) && currentUnit != null && Physics.Raycast(currentUnit.GetRaycastPos(), Vector3.down, out RaycastHit hit, 100))
+        if (currentUnit != null && Physics.Raycast(currentUnit.GetRaycastPos(), Vector3.down, out RaycastHit hit, 100))
         {
+            currentUnit.IsFlying = false;
+
             if (hit.collider.CompareTag("Tile"))
             {
 
@@ -76,6 +82,5 @@ public class UnitMove : MonoBehaviour
             currentUnit = null;
         }
     }
-
     public Action OnMove;
 }

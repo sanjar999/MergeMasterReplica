@@ -17,13 +17,13 @@ public class Unit : Creature
     protected UnitType _unitType;
     protected EnemySpawner _enemySpawner;
 
+    public bool IsFlying { get; set; }
     public void SetTile(Tile tile) { _unitTile = tile; }
     public Tile GetTile() => _unitTile;
     public void SetEnemySpawner(EnemySpawner enemySpawner) { _enemySpawner = enemySpawner; }
     public Vector3 GetRaycastPos() => _raycastPos.position;
     public UnitType GetUnitType() => _unitType;
     public void SetUnitType(UnitType unitType) { _unitType = unitType; }
-
 
     private void Start()
     {

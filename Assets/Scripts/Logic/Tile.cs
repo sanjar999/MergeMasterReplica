@@ -21,24 +21,24 @@ public class Tile : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        var cr = GetCreature();
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    var cr = GetCreature();
 
-        if (!HasUnit() && !_isGreen)
-        {
-            _mat.SetColor("_Color", _mat.GetColor("_Color") + new Color(0, 0, 0, .5f));
-            _isGreen = true;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (_isGreen)
-        {
-            _mat.SetColor("_Color", _mat.GetColor("_Color") - new Color(0, 0, 0, .5f));
-            _isGreen = false;
+    //    if (!_isGreen)
+    //    {
+    //        _mat.SetColor("_Color", _mat.GetColor("_Color") + new Color(0, 0, 0, .5f));
+    //        _isGreen = true;
+    //    }
+    //}
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (_isGreen)
+    //    {
+    //        _mat.SetColor("_Color", _mat.GetColor("_Color") - new Color(0, 0, 0, .5f));
+    //        _isGreen = false;
 
-        }
-    }
+    //    }
+    //}
 }
 
