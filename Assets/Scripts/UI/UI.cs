@@ -50,7 +50,6 @@ public class UI : MonoBehaviour
         if (!_isCalled)
         {
             _isCalled = true;
-            print("call");
             var stage = PlayerPrefs.GetInt("stage", 1);
             stage++;
             PlayerPrefs.SetInt("stage", stage);

@@ -27,7 +27,7 @@ public class Unit : Creature
 
     private void Start()
     {
-        _fight.OnFight += () => _isFight = true;
+        _fight.OnFight += () => _isFight = true; 
         _enemySpawner.OnSpawn += GetEnemies;
         _agent = GetComponent<NavMeshAgent>();
         GetEnemies();

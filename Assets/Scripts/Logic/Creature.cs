@@ -38,9 +38,9 @@ public class Creature : MonoBehaviour
         return result;
     }
 
-    protected virtual void DealDamage(Creature target, float amount)
+    protected virtual void DealDamage()
     {
-        target.GetDamage(amount);
+        _target.GetComponent<Creature>().GetDamage(_damage * _level);
         OnDealDamage?.Invoke();
 
     }
@@ -61,7 +61,7 @@ public class Creature : MonoBehaviour
 
     protected virtual void Attack()
     {
-        damageOffset += Time.deltaTime;
+        //damageOffset += Time.deltaTime;
         if (!_target)
             _target = GetCloseEnemy(_enemies);
         else
@@ -71,11 +71,11 @@ public class Creature : MonoBehaviour
             transform.LookAt(new Vector3(_target.transform.position.x, transform.position.y, _target.transform.position.z));
 
             _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-            if (_agent.remainingDistance <= _agent.stoppingDistance && damageOffset > .3f)
-            {
-                damageOffset = 0;
-                DealDamage(_target.GetComponent<Creature>(), _damage * _level);
-            }
+            //if (_agent.remainingDistance <= _agent.stoppingDistance && damageOffset > .3f)
+            //{
+            //    damageOffset = 0;
+            //    DealDamage(_target.GetComponent<Creature>(), _damage * _level);
+            //}
         }
         transform.LookAt(new Vector3(_target.transform.position.x, transform.position.y, _target.transform.position.z));
     }
