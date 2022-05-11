@@ -54,11 +54,23 @@ public class TileSpawner : MonoBehaviour
         for (int x = 0; x < _boardWidth; x++)
         {
             _tileXOffset = _tileOffsetXStep * x;
+            if (x != 0 && x % 2 == 1)
+            {
+                startZPos--;
+            }
+            else if(x != 0 && x % 2 == 0)
+            {
+                startZPos++;
+
+            }
             for (int y = 0; y < _boardHeight; y++)
             {
                 if (y == 0)
                     _tileZOffset = 0;
-                _tileZOffset += _tileOffsetZStep;
+                else
+                    _tileZOffset += _tileOffsetZStep;
+
+           
 
                 var instance = Instantiate(tile);
                 instance.SetCoord(x, y);

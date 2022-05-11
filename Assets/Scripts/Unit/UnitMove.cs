@@ -10,6 +10,9 @@ public class UnitMove : MonoBehaviour
     Camera _cam;
     Plane _plane;
 
+    bool _isSelected = false;
+    bool _isUnselected = false;
+
     private void Start()
     {
         _plane = new Plane(Vector3.up, _planePosition.position);
@@ -21,9 +24,9 @@ public class UnitMove : MonoBehaviour
 
         if (_currentUnit !=null)
             MovingUnit(ray, _plane, _currentUnit);
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !_isSelected)
             SelectUnit(ray, ref _currentUnit, ref _lastPosition);
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && !_isUnselected)
             UnselectUnit(ref _currentUnit, _mergeUnit);
     }
 
@@ -40,6 +43,8 @@ public class UnitMove : MonoBehaviour
 
     private void SelectUnit(Ray ray, ref Unit currentUnit, ref Vector3 lastPosition)
     {
+        _isSelected = true;
+        _isUnselected = false;
         if (Physics.Raycast(ray, out RaycastHit hit, 1000) && hit.collider.CompareTag("Unit"))
         {
             currentUnit = hit.collider.gameObject.GetComponentInParent<Unit>();
@@ -49,26 +54,32 @@ public class UnitMove : MonoBehaviour
     }
     private void UnselectUnit(ref Unit currentUnit, MergeUnit mergeUnit)
     {
+        _isSelected = false;
+        _isUnselected = true;
+
         if (currentUnit != null && Physics.Raycast(currentUnit.GetRaycastPos(), Vector3.down, out RaycastHit hit, 100))
         {
             currentUnit.IsFlying = false;
 
             if (hit.collider.CompareTag("Tile"))
             {
-
                 var tile = hit.collider.gameObject.GetComponent<Tile>();
                 if (tile.HasUnit() && mergeUnit.MergeTwoUnit(currentUnit, (Unit)tile.GetCreature()))
                 {
                     currentUnit.transform.position = tile.transform.position;
+                    _lastPosition = tile.transform.position;
                     tile.SetCreature(currentUnit);
                     currentUnit.ClearUnitTile();
                     currentUnit.SetTile(tile);
                 }
                 else if (tile.HasUnit())
+                {
                     currentUnit.transform.position = _lastPosition;
+                }
                 else
                 {
                     currentUnit.transform.position = tile.transform.position;
+                    _lastPosition = tile.transform.position;
                     tile.SetCreature(currentUnit);
                     currentUnit.ClearUnitTile();
                     currentUnit.SetTile(tile);
@@ -78,9 +89,17 @@ public class UnitMove : MonoBehaviour
 
             }
             else
+            {
                 currentUnit.transform.position = _lastPosition;
+            }
+                currentUnit = null;
+        }
+        else if(currentUnit!=null)
+        {
+            currentUnit.transform.position = _lastPosition;
             currentUnit = null;
         }
+
     }
     public Action OnMove;
 }
