@@ -49,7 +49,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5fae18fa4d7eb47e795d34e61977009e, type: 2}
+  m_Motion: {fileID: 7400000, guid: 876c7024d7cf64ea3bf6aefdb58f9c35, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -140,15 +140,15 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: acd5a8d64f84b4e808bde4d567897e7a, type: 2}
+    m_Motion: {fileID: 7400000, guid: 90d76362974424f02814f5c022a52a31, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 2
+    m_TimeScale: 3
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 946f2728e0ac6492eb93a313318b6168, type: 2}
+    m_Motion: {fileID: 7400000, guid: 7ed54e49066874e5baa187d3ed950d7a, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 3
@@ -168,7 +168,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BigRobot
+  m_Name: HumanRobot
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isAttack

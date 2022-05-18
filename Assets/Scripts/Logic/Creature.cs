@@ -71,11 +71,11 @@ public class Creature : MonoBehaviour
             transform.LookAt(new Vector3(_target.transform.position.x, transform.position.y, _target.transform.position.z));
 
             _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-            //if (_agent.remainingDistance <= _agent.stoppingDistance && damageOffset > .3f)
-            //{
-            //    damageOffset = 0;
-            //    DealDamage(_target.GetComponent<Creature>(), _damage * _level);
-            //}
+            if (_agent.remainingDistance <= _agent.stoppingDistance && damageOffset > .3f)
+            {
+                damageOffset = 0;
+                DealDamage();
+            }
         }
         transform.LookAt(new Vector3(_target.transform.position.x, transform.position.y, _target.transform.position.z));
     }
