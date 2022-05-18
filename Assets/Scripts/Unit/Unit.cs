@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class Unit : Creature
 {
@@ -17,7 +18,7 @@ public class Unit : Creature
     protected UnitType _unitType;
     protected EnemySpawner _enemySpawner;
 
-    public bool IsFlying { get; set; }
+    public bool IsDragging { get; set; }
     public void SetTile(Tile tile) { _unitTile = tile; }
     public Tile GetTile() => _unitTile;
     public void SetEnemySpawner(EnemySpawner enemySpawner) { _enemySpawner = enemySpawner; }
@@ -43,7 +44,8 @@ public class Unit : Creature
     {
         if (_isFight)
             Attack();
-        _animator.SetFloat("Blend", _agent.velocity.magnitude);
+        if (_animator)
+            _animator.SetFloat("Blend", _agent.velocity.magnitude);
     }
     private void GetEnemies() { _enemies = _enemySpawner.GetEnemies().ConvertAll(new Converter<Enemy, Creature>(CreatureToUnit)); }
 
@@ -74,11 +76,19 @@ public class Unit : Creature
     }
 
     public override void GetDamage(float amount)
-    {
+    { 
         base.GetDamage(amount - _defence);
         _target = GetCloseEnemy(_enemies);
     }
 
     private Enemy CreatureToUnit(Creature c) => c as Enemy;
     public void ClearUnitTile() { _unitTile.SetCreature(null); }
+
+    public void SetAgentSpeed(float speed)
+    {
+        float t = Math.Abs(speed-1);
+        DOTween.To(() => t, x => t = x, speed, 0.2f);
+        _agent.speed = t;
+        print(t);
+    }
 }

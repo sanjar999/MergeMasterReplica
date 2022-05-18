@@ -22,7 +22,7 @@ public class UnitMove : MonoBehaviour
     {
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
 
-        if (_currentUnit !=null)
+        if (_currentUnit != null)
             MovingUnit(ray, _plane, _currentUnit);
         if (Input.GetMouseButtonDown(0) && !_isSelected)
             SelectUnit(ray, ref _currentUnit, ref _lastPosition);
@@ -36,7 +36,7 @@ public class UnitMove : MonoBehaviour
         {
             var wP = ray.GetPoint(distance);
             var yHalfScale = currentUnit.transform.localScale.y * 0.5f;
-            var unitNewPosition = wP + Vector3.up * yHalfScale;
+            var unitNewPosition = wP + Vector3.up;
             currentUnit.transform.position = unitNewPosition;
         }
     }
@@ -47,9 +47,11 @@ public class UnitMove : MonoBehaviour
         _isUnselected = false;
         if (Physics.Raycast(ray, out RaycastHit hit, 1000) && hit.collider.CompareTag("Unit"))
         {
+            print("select");
+
             currentUnit = hit.collider.gameObject.GetComponentInParent<Unit>();
             lastPosition = currentUnit.transform.position;
-            currentUnit.IsFlying = true;
+            currentUnit.IsDragging = true;
         }
     }
     private void UnselectUnit(ref Unit currentUnit, MergeUnit mergeUnit)
@@ -59,13 +61,14 @@ public class UnitMove : MonoBehaviour
 
         if (currentUnit != null && Physics.Raycast(currentUnit.GetRaycastPos(), Vector3.down, out RaycastHit hit, 100))
         {
-            currentUnit.IsFlying = false;
+            currentUnit.IsDragging = false;
 
             if (hit.collider.CompareTag("Tile"))
             {
                 var tile = hit.collider.gameObject.GetComponent<Tile>();
                 if (tile.HasUnit() && mergeUnit.MergeTwoUnit(currentUnit, (Unit)tile.GetCreature()))
                 {
+                    print('1');
                     currentUnit.transform.position = tile.transform.position;
                     _lastPosition = tile.transform.position;
                     tile.SetCreature(currentUnit);
@@ -74,10 +77,13 @@ public class UnitMove : MonoBehaviour
                 }
                 else if (tile.HasUnit())
                 {
+                    print('2');
+
                     currentUnit.transform.position = _lastPosition;
                 }
                 else
                 {
+                    print('3');
                     currentUnit.transform.position = tile.transform.position;
                     _lastPosition = tile.transform.position;
                     tile.SetCreature(currentUnit);
@@ -90,12 +96,18 @@ public class UnitMove : MonoBehaviour
             }
             else
             {
+                print('4');
+
                 currentUnit.transform.position = _lastPosition;
             }
-                currentUnit = null;
+            currentUnit = null;
         }
-        else if(currentUnit!=null)
+        else if (currentUnit != null)
         {
+            print('5');
+
+            currentUnit.IsDragging = false;
+
             currentUnit.transform.position = _lastPosition;
             currentUnit = null;
         }

@@ -755,7 +755,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.9, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -844,7 +844,6 @@ GameObject:
   - component: {fileID: 8510668736671832983}
   - component: {fileID: 6757854144858271628}
   - component: {fileID: 7917183105104844377}
-  - component: {fileID: -63076287401424150}
   - component: {fileID: 375991719}
   m_Layer: 0
   m_Name: Archer
@@ -951,18 +950,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!114 &-63076287401424150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5171643010839937441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99f7092d2e1484a93908b5f5ec8da87c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &375991719
 MonoBehaviour:
   m_ObjectHideFlags: 0
