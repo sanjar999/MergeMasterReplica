@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class CreatureStats : MonoBehaviour
 {
     [SerializeField] Canvas _canvas;
-    [SerializeField] TMP_Text _levelText;
+    [SerializeField] TMP_Text _levelNum;
     [SerializeField] Slider _healthSlider;
     [SerializeField] Creature _creature;
 
@@ -37,7 +37,7 @@ public class CreatureStats : MonoBehaviour
     }
     private void UpdateLevel()
     {
-        _levelText.text = _creature.GetLevel().ToString();
+        _levelNum.text = _creature.GetLevel().ToString();
     }
     private void UpdateHealth()
     {

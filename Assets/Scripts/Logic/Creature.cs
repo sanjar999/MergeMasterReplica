@@ -61,7 +61,7 @@ public class Creature : MonoBehaviour
 
     protected virtual void Attack()
     {
-        //damageOffset += Time.deltaTime;
+        damageOffset += Time.deltaTime;
         if (!_target)
             _target = GetCloseEnemy(_enemies);
         else

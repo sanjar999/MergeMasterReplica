@@ -89,6 +89,5 @@ public class Unit : Creature
         float t = Math.Abs(speed-1);
         DOTween.To(() => t, x => t = x, speed, 0.2f);
         _agent.speed = t;
-        print(t);
     }
 }

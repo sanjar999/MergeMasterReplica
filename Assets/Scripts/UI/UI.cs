@@ -39,7 +39,7 @@ public class UI : MonoBehaviour
         duration += frameDuration;
         if (duration >= sampleDuration)
         {
-            _fps.SetText("FPS\n{0:0}", frames / duration);
+            _fps.SetText("FPS:{0:0}", frames / duration);
             frames = 0;
             duration = 0f;
         }
