@@ -10,21 +10,21 @@ public class Fight : MonoBehaviour
 
     void Start()
     {
-        _fightBtn.onClick.AddListener(StartFight);
+        _fightBtn.onClick.AddListener(() => OnFight?.Invoke());
     }
 
-    private void StartFight()
-    {
-        OnFight?.Invoke();
-        foreach (var unit in _unitSpawner.GetUnits())
-        {
-            unit.StartFightAnim();
-        }
-        foreach (var enemy in _enemySpawner.GetEnemies())
-        {
-            enemy.StartFightAnim();
-        }
-    }
+    //private void StartFight()
+    //{
+    //    OnFight?.Invoke();
+    //    foreach (var unit in _unitSpawner.GetUnits())
+    //    {
+    //        unit.StartFightAnim();
+    //    }
+    //    foreach (var enemy in _enemySpawner.GetEnemies())
+    //    {
+    //        enemy.StartFightAnim();
+    //    }
+    //}
 
     public Action OnFight;
 }

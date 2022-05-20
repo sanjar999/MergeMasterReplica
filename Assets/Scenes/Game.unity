@@ -1331,7 +1331,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.9699855, g: 1, b: 0.7607843, a: 1}
+  m_Color: {r: 0.7607843, g: 0.94421965, b: 1, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
@@ -2329,7 +2329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2649708691601006806, guid: f4bf3aa7741fe41e4870c31c1298d382, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4bf3aa7741fe41e4870c31c1298d382, type: 3}

@@ -28,7 +28,8 @@ public class Unit : Creature
 
     private void Start()
     {
-        _fight.OnFight += () => _isFight = true; 
+        _fight.OnFight += () => _isFight = true;
+        _fight.OnFight += StartFightAnim;
         _enemySpawner.OnSpawn += GetEnemies;
         _agent = GetComponent<NavMeshAgent>();
         GetEnemies();
@@ -37,6 +38,7 @@ public class Unit : Creature
     private void OnDisable()
     {
         _fight.OnFight -= () => _isFight = true;
+        _fight.OnFight -= StartFightAnim;
         _enemySpawner.OnSpawn -= GetEnemies;
     }
 
