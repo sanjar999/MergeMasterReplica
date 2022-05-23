@@ -3,21 +3,18 @@ using UnityEngine;
 
 public class TileSpawner : MonoBehaviour
 {
-    [SerializeField] Tile _greenTilePrefab;
-    [SerializeField] Tile _redTilePrefab;
-
-    [SerializeField] int _boardWidth;
-    [SerializeField] int _boardHeight;
-
-    [SerializeField] float _tileXOffset;
-    [SerializeField] float _tileZOffset;
-    [SerializeField] float _tileOffsetXStep = 2f;
-    [SerializeField] float _tileOffsetZStep = 1.5f;
-
-    [SerializeField] float _startXPos = -4f;
-    [SerializeField] float _startZPos = -7f;
-    [SerializeField] float _redStartZPos = -0.75f;
-    [SerializeField] Transform _parent;
+    [SerializeField] private Transform _parent;
+    [SerializeField] private Tile _greenTilePrefab;
+    [SerializeField] private Tile _redTilePrefab;
+    [SerializeField] private int _boardWidth;
+    [SerializeField] private int _boardHeight;
+    [SerializeField] private float _tileOffsetXStep;
+    [SerializeField] private float _tileOffsetZStep;
+    [SerializeField] private float _startXPos;
+    [SerializeField] private float _startZPos;
+    [SerializeField] private float _secondStartZPos;
+    [SerializeField] private float _redStartZPos;
+    [SerializeField] private float _secondRedStartZPos;
 
     private List<Tile> _greenTiles = new List<Tile>();
     private List<Tile> _redTiles = new List<Tile>();
@@ -29,8 +26,8 @@ public class TileSpawner : MonoBehaviour
 
     private void Start()
     {
-        SpawnTiles(_greenTilePrefab, _startZPos, _greenTiles);
-        SpawnTiles(_redTilePrefab, _redStartZPos, _redTiles);
+        SpawnTiles(_greenTilePrefab, _startZPos, _secondStartZPos, _greenTiles);
+        SpawnTiles(_redTilePrefab, _redStartZPos, _secondRedStartZPos, _redTiles);
     }
 
     public bool HasEmptyTile()
@@ -49,38 +46,25 @@ public class TileSpawner : MonoBehaviour
         return false;
     }
 
-    private void SpawnTiles(Tile tile, float startZPos, List<Tile> tileHolder)
+    private void SpawnTiles(Tile tile, float startZPos, float secondStartZpos, List<Tile> tileHolder)
     {
+        float zPos;
         for (int x = 0; x < _boardWidth; x++)
         {
-            _tileXOffset = _tileOffsetXStep * x;
-            if (x != 0 && x % 2 == 1)
-            {
-                startZPos--;
-            }
-            else if(x != 0 && x % 2 == 0)
-            {
-                startZPos++;
+            if (x % 2 == 1)
+                zPos = secondStartZpos;
+            else 
+                zPos = startZPos;
 
-            }
             for (int y = 0; y < _boardHeight; y++)
             {
-                if (y == 0)
-                    _tileZOffset = 0;
-                else
-                    _tileZOffset += _tileOffsetZStep;
-
-           
-
                 var instance = Instantiate(tile);
                 instance.SetCoord(x, y);
                 tileHolder.Add(instance);
-                //index to position
-                instance.transform.position = new Vector3(_startXPos + _tileXOffset,
-                                                           instance.transform.position.y,
-                                                          startZPos + _tileZOffset);
-
                 instance.transform.parent = _parent;
+                instance.transform.position = new Vector3(_startXPos + _tileOffsetXStep * x,
+                                                          instance.transform.position.y,
+                                                          zPos + _tileOffsetZStep * y);
             }
         }
     }

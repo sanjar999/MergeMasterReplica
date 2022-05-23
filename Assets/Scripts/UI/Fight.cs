@@ -13,18 +13,5 @@ public class Fight : MonoBehaviour
         _fightBtn.onClick.AddListener(() => OnFight?.Invoke());
     }
 
-    //private void StartFight()
-    //{
-    //    OnFight?.Invoke();
-    //    foreach (var unit in _unitSpawner.GetUnits())
-    //    {
-    //        unit.StartFightAnim();
-    //    }
-    //    foreach (var enemy in _enemySpawner.GetEnemies())
-    //    {
-    //        enemy.StartFightAnim();
-    //    }
-    //}
-
     public Action OnFight;
 }

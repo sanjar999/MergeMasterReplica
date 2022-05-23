@@ -6,8 +6,7 @@ public class UI : MonoBehaviour
     [SerializeField] TMP_Text _stageNumber;
     [SerializeField] TMP_Text _fps;
     [SerializeField] EnemySpawner _enemySpawner;
-    [SerializeField, Range(0.1f, 2f)]
-    float sampleDuration = 1f;
+    [SerializeField, Range(0.1f, 2f)] float sampleDuration = 1f;
     int frames;
     float duration;
 

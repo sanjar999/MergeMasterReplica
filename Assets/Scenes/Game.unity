@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180126783}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbbeeee415fbb48b981fe23ac42d6bad, type: 3}
   m_Name: 
@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180126783}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e58e506e83a804230a43716c2f2c0e72, type: 3}
   m_Name: 
@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180126783}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a766448b5fb484ef98044c89d2bb7835, type: 3}
   m_Name: 
@@ -1173,7 +1173,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180126783}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b7275f9e1cb14427b5c2b0d389a4859, type: 3}
   m_Name: 
@@ -1188,7 +1188,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180126783}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a723a643736584da19c977bf6b89af74, type: 3}
   m_Name: 
@@ -1203,7 +1203,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180126783}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d78b25efaa9df451eb56e950a332c8fb, type: 3}
   m_Name: 
@@ -1238,23 +1238,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180126783}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51f3e4df3331d420689868f8f5608616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _parent: {fileID: 1985126682}
   _greenTilePrefab: {fileID: -4226759539688213861, guid: e0f2533b1431148e7a5042d23a523658, type: 3}
   _redTilePrefab: {fileID: -4226759539688213861, guid: abc2df2d4644c4acf9addf72ed800524, type: 3}
   _boardWidth: 5
   _boardHeight: 4
-  _tileXOffset: 0
-  _tileZOffset: 0
   _tileOffsetXStep: 1.76
   _tileOffsetZStep: 2
   _startXPos: -3.43
   _startZPos: -8.9
+  _secondStartZPos: -9.9
   _redStartZPos: -0.75
-  _parent: {fileID: 1985126682}
+  _secondRedStartZPos: -1.75
 --- !u!114 &1180126794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1262,7 +1262,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180126783}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36a862bff15fd45d7956ada020bf6b2f, type: 3}
   m_Name: 

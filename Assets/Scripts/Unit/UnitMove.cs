@@ -5,6 +5,7 @@ public class UnitMove : MonoBehaviour
 {
     [SerializeField] Transform _planePosition;
     [SerializeField] MergeUnit _mergeUnit;
+
     Vector3 _lastPosition;
     Unit _currentUnit;
     Camera _cam;
@@ -21,7 +22,7 @@ public class UnitMove : MonoBehaviour
     private void Update()
     {
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-
+        
         if (_currentUnit != null)
             MovingUnit(ray, _plane, _currentUnit);
         if (Input.GetMouseButtonDown(0) && !_isSelected)
