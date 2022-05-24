@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1151259935447437962}
   - component: {fileID: 6420501510631065840}
-  - component: {fileID: 5537973763114648639}
   - component: {fileID: 5537973763114648638}
   - component: {fileID: 40711209229757121}
+  - component: {fileID: 1302906888561329839}
   m_Layer: 0
   m_Name: Viking
   m_TagString: Unit
@@ -59,26 +59,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5537973763114648639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 338271775945885744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87f9690f54cac4b89b16db28032556d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 6420501510631065840}
-  _health: 80
-  _damage: 5
-  _raycastPos: {fileID: 483323554591087839}
-  _defence: 0.5
-  _lvlUpHpIncrease: 10
-  _lvlUpDefIncrease: 0.1
-  _lvlUpDmgIncrease: 0.4
 --- !u!114 &5537973763114648638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,9 +72,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 7260578334077111439}
-  _levelText: {fileID: 8179393015552733840}
+  _levelNum: {fileID: 8179393015552733840}
   _healthSlider: {fileID: 312853628214723764}
-  _creature: {fileID: 5537973763114648639}
+  _creature: {fileID: 1302906888561329839}
 --- !u!195 &40711209229757121
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -117,6 +97,26 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
+--- !u!114 &1302906888561329839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338271775945885744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3202e690fd9442e95764973aae0402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 6420501510631065840}
+  _health: 80
+  _damage: 2
+  _raycastPos: {fileID: 483323554591087839}
+  _defence: 0.5
+  _lvlUpHpIncrease: 10
+  _lvlUpDefIncrease: 0.1
+  _lvlUpDmgIncrease: 0.4
 --- !u!1 &352858166807239392
 GameObject:
   m_ObjectHideFlags: 0

@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 7260578334077111439}
-  _levelText: {fileID: 8179393015552733840}
+  _levelNum: {fileID: 8179393015552733840}
   _healthSlider: {fileID: 312853628214723764}
   _creature: {fileID: 8980152346313270100}
 --- !u!195 &40711209229757121

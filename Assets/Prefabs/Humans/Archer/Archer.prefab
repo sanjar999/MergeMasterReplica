@@ -755,7 +755,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.9, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -844,7 +844,6 @@ GameObject:
   - component: {fileID: 8510668736671832983}
   - component: {fileID: 6757854144858271628}
   - component: {fileID: 7917183105104844377}
-  - component: {fileID: 375991719}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Unit
@@ -925,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 693844071235949283}
-  _levelText: {fileID: 4277317281592297712}
+  _levelNum: {fileID: 4277317281592297712}
   _healthSlider: {fileID: 759840538229967400}
   _creature: {fileID: 8510668736671832983}
 --- !u!195 &7917183105104844377
@@ -950,20 +949,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!114 &375991719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5171643010839937441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f7df47af8ff4486f8a723715bc051ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _arrow: {fileID: 1310879774}
-  _shootPos: {fileID: 2052772197}
 --- !u!1 &5267828656271228598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1794,11 +1779,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6e2495311cc94e70a45dcc4dc0fde77, type: 3}
---- !u!1 &1310879774 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8475557716362376883, guid: f6e2495311cc94e70a45dcc4dc0fde77, type: 3}
-  m_PrefabInstance: {fileID: 8475557715123095213}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1310879775 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8475557716362376882, guid: f6e2495311cc94e70a45dcc4dc0fde77, type: 3}
