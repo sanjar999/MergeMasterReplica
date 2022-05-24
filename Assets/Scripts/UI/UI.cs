@@ -1,15 +1,17 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] TMP_Text _stageNumber;
-    [SerializeField] TMP_Text _fps;
-    [SerializeField] StageManager _stageManager;
-    [SerializeField, Range(0.1f, 2f)] float sampleDuration = 1f;
-    int frames;
-    float duration;
+    [SerializeField] private Button _fightBtn;
+    [SerializeField] private TMP_Text _stageNumber;
+    [SerializeField] private TMP_Text _fps;
+    [SerializeField] private StageManager _stageManager;
+    [SerializeField, Range(0.1f, 2f)] private float sampleDuration = 1f;
 
+    private int frames;
+    private float duration;
 
     private void OnEnable()
     {
@@ -23,9 +25,8 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
-        var stage = PlayerPrefs.GetInt("stage", 1);
-        _stageNumber.text = stage.ToString();
-
+        _fightBtn.onClick.AddListener(() => Events.OnFight?.Invoke());
+        UpdateStageText();
     }
 
     private void Update()

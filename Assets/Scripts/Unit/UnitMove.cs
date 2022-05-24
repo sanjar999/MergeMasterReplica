@@ -48,8 +48,6 @@ public class UnitMove : MonoBehaviour
         _isUnselected = false;
         if (Physics.Raycast(ray, out RaycastHit hit, 1000) && hit.collider.CompareTag("Unit"))
         {
-            print("select");
-
             currentUnit = hit.collider.gameObject.GetComponentInParent<Unit>();
             lastPosition = currentUnit.transform.position;
             currentUnit.IsDragging = true;
@@ -69,7 +67,6 @@ public class UnitMove : MonoBehaviour
                 var tile = hit.collider.gameObject.GetComponent<Tile>();
                 if (tile.HasUnit() && mergeUnit.MergeTwoUnit(currentUnit, (Unit)tile.GetCreature()))
                 {
-                    print('1');
                     currentUnit.transform.position = tile.transform.position;
                     _lastPosition = tile.transform.position;
                     tile.SetCreature(currentUnit);
@@ -78,13 +75,10 @@ public class UnitMove : MonoBehaviour
                 }
                 else if (tile.HasUnit())
                 {
-                    print('2');
-
                     currentUnit.transform.position = _lastPosition;
                 }
                 else
                 {
-                    print('3');
                     currentUnit.transform.position = tile.transform.position;
                     _lastPosition = tile.transform.position;
                     tile.SetCreature(currentUnit);
@@ -97,18 +91,13 @@ public class UnitMove : MonoBehaviour
             }
             else
             {
-                print('4');
-
                 currentUnit.transform.position = _lastPosition;
             }
             currentUnit = null;
         }
         else if (currentUnit != null)
         {
-            print('5');
-
             currentUnit.IsDragging = false;
-
             currentUnit.transform.position = _lastPosition;
             currentUnit = null;
         }

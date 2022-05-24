@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UnitSpawner : MonoBehaviour
 {
-    [SerializeField] Fight _fight;
     [SerializeField] Unit[] _unitTypes;
     [SerializeField] EnemySpawner _enemySpawner;
     [SerializeField] TileSpawner _tileSpawner;
@@ -52,7 +51,6 @@ public class UnitSpawner : MonoBehaviour
                 randomTile.SetCreature(instance);
 
                 instance.SetUnitType(unitType);
-                instance.SetFight(_fight);
                 instance.SetEnemySpawner(_enemySpawner);
                 //instance.SetCoord(randomTile.GetCoord());
                 instance.SetTile(randomTile);
@@ -79,7 +77,6 @@ public class UnitSpawner : MonoBehaviour
             //setting index off spawned unit
             instance.SetLevel(unitLevel);
             instance.SetUnitType((Unit.UnitType)unitType);
-            instance.SetFight(_fight);
             instance.SetEnemySpawner(_enemySpawner);
 
             var unitTile = _tileSpawner.GetTiles()[unitTileY + _tileSpawner.GetHeight() * unitTileX];

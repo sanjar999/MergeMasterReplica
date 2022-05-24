@@ -5,7 +5,6 @@ public class GameProgress : MonoBehaviour
 {
     [SerializeField] UnitSpawner _unitSpawner;
     [SerializeField] UnitMove _unitMove;
-    [SerializeField] Fight _fight;
     private List<Unit> _units = new List<Unit>();
 
     private void Start()

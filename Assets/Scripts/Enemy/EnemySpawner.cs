@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] Fight _fight;
     [SerializeField] Enemy[] _enemyTypes;
     [SerializeField] UnitSpawner _unitSpawner;
     [SerializeField] TileSpawner _tileSpawner;
@@ -53,7 +52,6 @@ public class EnemySpawner : MonoBehaviour
 
                 _enemies.Add(instance);
                 randomRangedTile.SetCreature(instance);
-                instance.SetFight(_fight);
                 instance.SetUnitSpawner(_unitSpawner);
                 instance.SetLevel(_level);
                 //instance.SetTile(randomRangedTile);

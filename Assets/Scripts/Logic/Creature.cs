@@ -12,9 +12,7 @@ public class Creature : MonoBehaviour
     protected Creature _target;
     protected int _level = 1;
     protected bool _isFight;
-    protected Fight _fight;
 
-    public void SetFight(Fight fight) { _fight = fight; }
     public float GetHealth() => _health;
     public int GetLevel() => _level;
     public virtual void SetLevel(int level) { _level = level; }
