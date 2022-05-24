@@ -24,7 +24,6 @@ public class UnitSpawner : MonoBehaviour
             foreach (var enemy in _units)
                 if (enemy != null)
                     return true;
-            OnLose?.Invoke();
             return false;
         }
     }
@@ -62,7 +61,7 @@ public class UnitSpawner : MonoBehaviour
         }
         else SpawnUnit(unitType);
 
-        OnSpawn?.Invoke();
+        Events.OnSpawn?.Invoke();
     }
 
     private void RestoreProgress()
@@ -91,7 +90,4 @@ public class UnitSpawner : MonoBehaviour
             instance.transform.position = unitTile.transform.position;
         }
     }
-
-    public Action OnSpawn;
-    public Action OnLose;
 }

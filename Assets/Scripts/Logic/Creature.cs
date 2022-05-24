@@ -23,6 +23,7 @@ public class Creature : MonoBehaviour
     protected List<Creature> _enemies;
 
 
+
     public Creature GetCloseEnemy(List<Creature> enemies)
     {
         float distance = float.MaxValue;
@@ -41,13 +42,13 @@ public class Creature : MonoBehaviour
     protected virtual void DealDamage()
     {
         _target.GetComponent<Creature>().GetDamage(_damage * _level);
-        OnDealDamage?.Invoke();
+        Events.OnDealDamage?.Invoke();
 
     }
     public virtual void GetDamage(float amount)
     {
         _health -= amount;
-        OnGetDamage?.Invoke();
+        Events.OnGetDamage?.Invoke();
         if (_health <= 0)
         {
             _agent.enabled = false;
@@ -56,7 +57,7 @@ public class Creature : MonoBehaviour
         }
     }
 
-    public virtual void LevelUp() { _level++; OnLevelUp?.Invoke(); }
+    public virtual void LevelUp() { _level++; Events.OnLevelUp?.Invoke(); }
 
 
     protected virtual void Attack()
@@ -77,11 +78,10 @@ public class Creature : MonoBehaviour
                 DealDamage();
             }
         }
-        transform.LookAt(new Vector3(_target.transform.position.x, transform.position.y, _target.transform.position.z));
+        if (_target && transform)
+            transform.LookAt(new Vector3(_target.transform.position.x, transform.position.y, _target.transform.position.z));
     }
     public void StartFightAnim() { _animator.SetBool("isAttack", true); }
 
-    public Action OnGetDamage;
-    public Action OnDealDamage;
-    public Action OnLevelUp;
+
 }

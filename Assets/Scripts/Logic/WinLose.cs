@@ -13,14 +13,14 @@ public class WinLose : MonoBehaviour
 
     private void OnEnable()
     {
-        _enemySpawner.OnWin += ReloadLevel;
-        _unitSpawner.OnLose += ReloadLevel;
+        Events.OnWin += ReloadLevel;
+        Events.OnLose += ReloadLevel;
     }
 
     private void OnDisable()
     {
-        _enemySpawner.OnWin -= ReloadLevel;
-        _unitSpawner.OnLose -= ReloadLevel;
+        Events.OnWin -= ReloadLevel;
+        Events.OnLose -= ReloadLevel;
 
     }
 

@@ -5,21 +5,20 @@ public class UI : MonoBehaviour
 {
     [SerializeField] TMP_Text _stageNumber;
     [SerializeField] TMP_Text _fps;
-    [SerializeField] EnemySpawner _enemySpawner;
+    [SerializeField] StageManager _stageManager;
     [SerializeField, Range(0.1f, 2f)] float sampleDuration = 1f;
     int frames;
     float duration;
 
-    private bool _isCalled;
 
     private void OnEnable()
     {
-        _enemySpawner.OnWin += StageUp;
+        Events.OnWin += UpdateStageText;
     }
 
     private void OnDisable()
     {
-        _enemySpawner.OnWin -= StageUp;
+        Events.OnWin -= UpdateStageText;
     }
 
     private void Start()
@@ -30,6 +29,11 @@ public class UI : MonoBehaviour
     }
 
     private void Update()
+    {
+        CalculateFps();
+    }
+
+    private void CalculateFps()
     {
         float frameDuration = Time.unscaledDeltaTime;
         frames += 1;
@@ -42,15 +46,8 @@ public class UI : MonoBehaviour
         }
     }
 
-    private void StageUp()
+    private void UpdateStageText()
     {
-        if (!_isCalled)
-        {
-            _isCalled = true;
-            var stage = PlayerPrefs.GetInt("stage", 1);
-            stage++;
-            PlayerPrefs.SetInt("stage", stage);
-            _stageNumber.text = stage.ToString();
-        }
+        _stageNumber.text = _stageManager.GetCurrentStage().ToString();
     }
 }

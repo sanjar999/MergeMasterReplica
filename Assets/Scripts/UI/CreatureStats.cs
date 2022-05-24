@@ -12,15 +12,15 @@ public class CreatureStats : MonoBehaviour
 
     private void OnEnable()
     {
-        _creature.OnLevelUp += UpdateLevel;
-        _creature.OnGetDamage += UpdateHealth;
+        Events.OnLevelUp += UpdateLevel;
+        Events.OnGetDamage += UpdateHealth;
 
     }
 
     private void OnDisable()
     {
-        _creature.OnLevelUp -= UpdateLevel;
-        _creature.OnGetDamage -= UpdateHealth;
+        Events.OnLevelUp -= UpdateLevel;
+        Events.OnGetDamage -= UpdateHealth;
 
     }
 

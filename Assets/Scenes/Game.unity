@@ -617,7 +617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stageNumber: {fileID: 1697761179}
   _fps: {fileID: 2031396684}
-  _enemySpawner: {fileID: 1180126791}
+  _stageManager: {fileID: 1180126792}
   sampleDuration: 1
 --- !u!1 &727477958
 GameObject:

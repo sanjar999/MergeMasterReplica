@@ -25,7 +25,6 @@ public class EnemySpawner : MonoBehaviour
         foreach (var enemy in _enemies)
             if (enemy != null)
                 return true;
-        OnWin?.Invoke();
         return false;
     }
 
@@ -73,6 +72,5 @@ public class EnemySpawner : MonoBehaviour
     {
         return tiles[UnityEngine.Random.Range(0, 4) + (tileSpawner.GetWidth() - 1) * UnityEngine.Random.Range(0, tileSpawner.GetHeight())];
     }
-    public Action OnSpawn;
-    public Action OnWin;
+
 }

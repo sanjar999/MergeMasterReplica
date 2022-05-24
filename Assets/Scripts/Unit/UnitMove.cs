@@ -92,7 +92,7 @@ public class UnitMove : MonoBehaviour
                     currentUnit.SetTile(tile);
                 }
 
-                OnMove?.Invoke();
+                Events.OnMove?.Invoke();
 
             }
             else
@@ -114,5 +114,4 @@ public class UnitMove : MonoBehaviour
         }
 
     }
-    public Action OnMove;
 }

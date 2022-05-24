@@ -7,21 +7,23 @@ public class Enemy : Creature
     [SerializeField] protected float _lvlUpHpIncrease = 10f;
     [SerializeField] protected float _lvlUpDmgIncrease = .4f;
 
-    public enum EnemyType { range, melee }
-
     protected EnemyType _enemyType;
     protected UnitSpawner _unitSpawner;
+    protected bool _isLose;
 
+    public enum EnemyType { range, melee }
     public void SetUnitSpawner(UnitSpawner unitSpawner) { _unitSpawner = unitSpawner; }
-
     public EnemyType GetUnitType() => _enemyType;
     public void SetUnitType(EnemyType enemyType) { _enemyType = enemyType; }
 
+    float sampleDuration = .5f;
+    float duration;
+
     private void Start()
     {
-        _fight.OnFight += () => _isFight = true;
-        _fight.OnFight += StartFightAnim;
-        _unitSpawner.OnSpawn += GetEnemies;
+        Events.OnFight += () => _isFight = true;
+        Events.OnFight += StartFightAnim;
+        Events.OnSpawn += GetEnemies;
 
         _agent = GetComponent<NavMeshAgent>();
         GetEnemies();
@@ -29,15 +31,17 @@ public class Enemy : Creature
 
     private void OnDisable()
     {
-        _fight.OnFight -= () => _isFight = true;
-        _fight.OnFight -= StartFightAnim;
-        _unitSpawner.OnSpawn -= GetEnemies;
+        Events.OnFight -= () => _isFight = true;
+        Events.OnFight -= StartFightAnim;
+        Events.OnSpawn -= GetEnemies;
 
     }
 
     private void Update()
     {
-        if (_isFight)
+        float frameDuration = Time.unscaledDeltaTime;
+        duration += frameDuration;
+        if (_isFight && duration >= sampleDuration)
             Attack();
         _animator.SetFloat("Blend", _agent.velocity.magnitude);
     }
@@ -60,10 +64,12 @@ public class Enemy : Creature
     private void GetEnemies() { _enemies = _unitSpawner.GetUnits().ConvertAll(new Converter<Unit, Creature>(CreatureToUnit)); }
     protected override void Attack()
     {
-        if (!_unitSpawner.HasUnit)
+        if (!_unitSpawner.HasUnit && !_isLose)
         {
+            _isLose = true;
             _agent.isStopped = true;
             _animator.SetBool("isAttack", false);
+            Events.OnLose?.Invoke();
             return;
         }
         base.Attack();

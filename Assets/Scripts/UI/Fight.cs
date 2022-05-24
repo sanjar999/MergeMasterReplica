@@ -10,8 +10,7 @@ public class Fight : MonoBehaviour
 
     void Start()
     {
-        _fightBtn.onClick.AddListener(() => OnFight?.Invoke());
+        _fightBtn.onClick.AddListener(() => Events.OnFight?.Invoke());
     }
 
-    public Action OnFight;
 }

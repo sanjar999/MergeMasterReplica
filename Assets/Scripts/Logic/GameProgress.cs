@@ -14,13 +14,13 @@ public class GameProgress : MonoBehaviour
     }
     private void OnEnable()
     {
-        _unitSpawner.OnSpawn += SaveData;
-        _unitMove.OnMove += SaveData;
+        Events.OnSpawn += SaveData;
+        Events.OnMove += SaveData;
     }
     private void OnDisable()
     {
-        _unitSpawner.OnSpawn -= SaveData;
-        _unitMove.OnMove -= SaveData;
+        Events.OnSpawn -= SaveData;
+        Events.OnMove -= SaveData;
     }
 
     private void SaveData()
