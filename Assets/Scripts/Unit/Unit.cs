@@ -58,7 +58,7 @@ public class Unit : Creature
 
     protected override void Attack()
     {
-        if (!_enemySpawner.GetHasEnemy() && !_isWin)
+        if (!_enemySpawner.HasEnemy() && !_isWin)
         {
             _isWin = true;
             _agent.isStopped = true;
@@ -87,7 +87,7 @@ public class Unit : Creature
     public override void GetDamage(float amount)
     { 
         base.GetDamage(amount - _defence);
-        _target = GetCloseEnemy(_enemies);
+        _target = GetClosestEnemy(_enemies);
     }
 
     private Enemy CreatureToUnit(Creature c) => c as Enemy;

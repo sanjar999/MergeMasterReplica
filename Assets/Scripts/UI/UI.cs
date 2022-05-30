@@ -13,20 +13,21 @@ public class UI : MonoBehaviour
     private int frames;
     private float duration;
 
-    private void OnEnable()
-    {
-        Events.OnWin += UpdateStageText;
-    }
+    //private void OnEnable()
+    //{
+    //    Events.OnWin += UpdateStageText;
+    //}
 
-    private void OnDisable()
-    {
-        Events.OnWin -= UpdateStageText;
-    }
+    //private void OnDisable()
+    //{
+    //    Events.OnWin -= UpdateStageText;
+    //}
 
     private void Start()
     {
+        _stageNumber.text = _stageManager.GetCurrentStage().ToString();
         _fightBtn.onClick.AddListener(() => Events.OnFight?.Invoke());
-        UpdateStageText();
+        //UpdateStageText();
     }
 
     private void Update()
@@ -47,8 +48,8 @@ public class UI : MonoBehaviour
         }
     }
 
-    private void UpdateStageText()
-    {
-        _stageNumber.text = _stageManager.GetCurrentStage().ToString();
-    }
+    //private void UpdateStageText()
+    //{
+    //    _stageNumber.text = _stageManager.GetCurrentStage().ToString();
+    //}
 }

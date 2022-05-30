@@ -22,7 +22,7 @@ public class Creature : MonoBehaviour
 
 
 
-    public Creature GetCloseEnemy(List<Creature> enemies)
+    public Creature GetClosestEnemy(List<Creature> enemies)
     {
         float distance = float.MaxValue;
         Creature result = null;
@@ -62,7 +62,7 @@ public class Creature : MonoBehaviour
     {
         damageOffset += Time.deltaTime;
         if (!_target)
-            _target = GetCloseEnemy(_enemies);
+            _target = GetClosestEnemy(_enemies);
         else
         {
             _agent.SetDestination(_target.transform.position);

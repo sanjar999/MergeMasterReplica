@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using rnd = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -13,13 +13,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int _levelUpStep = 2;
     [SerializeField] int _amountIncraseStep = 3;
 
-    private List<Enemy> _enemies = new List<Enemy>();
-    private List<Tile> _tiles = new List<Tile>();
+    private List<Enemy> _enemies = new();
+    private List<Tile> _tiles = new();
     private int _level = 1;
 
     public List<Enemy> GetEnemies() => _enemies;
 
-    public bool GetHasEnemy()
+    public bool HasEnemy()
     {
         foreach (var enemy in _enemies)
             if (enemy != null)
@@ -29,9 +29,10 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        var currentStage = _stageManager.GetCurrentStage();
         _tiles = _tileSpawner.GetRedTiles();
-        _level = _stageManager.GetCurrentStage() / _levelUpStep+1;
-        _enemyAmount = _stageManager.GetCurrentStage() / _amountIncraseStep+1;
+        _level = Mathf.Clamp(currentStage / _levelUpStep, 1, int.MaxValue);
+        _enemyAmount = Mathf.Clamp(currentStage / _amountIncraseStep, 1 , int.MaxValue);
         SpawnEnemeis(_enemyAmount);
     }
 
@@ -63,12 +64,12 @@ public class EnemySpawner : MonoBehaviour
 
     private Tile GetRandomMeleeTile(List<Tile> tiles, TileSpawner tileSpawner)
     {
-        return tiles[UnityEngine.Random.Range(0, 2) + (tileSpawner.GetWidth() - 1) * UnityEngine.Random.Range(0, tileSpawner.GetHeight())];
+        return tiles[rnd.Range(0, 2) + (tileSpawner.GetWidth() - 1) * rnd.Range(0, tileSpawner.GetHeight())];
     }
 
     private Tile GetRandomRangedTile(List<Tile> tiles, TileSpawner tileSpawner)
     {
-        return tiles[UnityEngine.Random.Range(0, 4) + (tileSpawner.GetWidth() - 1) * UnityEngine.Random.Range(0, tileSpawner.GetHeight())];
+        return tiles[rnd.Range(0, 4) + (tileSpawner.GetWidth() - 1) * rnd.Range(0, tileSpawner.GetHeight())];
     }
 
 }

@@ -1142,7 +1142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a766448b5fb484ef98044c89d2bb7835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fight: {fileID: 0}
   _unitTypes:
   - {fileID: 4077059660630877897, guid: b8ae8c22c930f477fa58ac8e7064f87a, type: 3}
   - {fileID: 675763351393775156, guid: 316f0d455aeae4936b9b3836fec03b9c, type: 3}
@@ -1178,7 +1177,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitSpawner: {fileID: 1180126787}
   _unitMove: {fileID: 1180126785}
-  _fight: {fileID: 0}
 --- !u!114 &1180126791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1191,7 +1189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d78b25efaa9df451eb56e950a332c8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fight: {fileID: 0}
   _enemyTypes:
   - {fileID: 1538206191, guid: 249bc91c94da34095be4103a27d39a35, type: 3}
   - {fileID: 5561867855431828968, guid: d903ef39d874b43bba9d4f51a82c36bf, type: 3}
