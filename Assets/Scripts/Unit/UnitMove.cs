@@ -1,18 +1,17 @@
-using System;
 using UnityEngine;
 
 public class UnitMove : MonoBehaviour
 {
-    [SerializeField] Transform _planePosition;
-    [SerializeField] MergeUnit _mergeUnit;
+    [SerializeField] private Transform _planePosition;
+    [SerializeField] private MergeUnit _mergeUnit;
 
-    Vector3 _lastPosition;
-    Unit _currentUnit;
-    Camera _cam;
-    Plane _plane;
+    private Vector3 _lastPosition;
+    private Unit _currentUnit;
+    private Camera _cam;
+    private Plane _plane;
 
-    bool _isSelected = false;
-    bool _isUnselected = false;
+    private bool _isSelected = false;
+    private bool _isUnselected = false;
 
     private void Start()
     {
@@ -22,7 +21,7 @@ public class UnitMove : MonoBehaviour
     private void Update()
     {
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-        
+
         if (_currentUnit != null)
             MovingUnit(ray, _plane, _currentUnit);
         if (Input.GetMouseButtonDown(0) && !_isSelected)
@@ -36,7 +35,6 @@ public class UnitMove : MonoBehaviour
         if (plane.Raycast(ray, out float distance))
         {
             var wP = ray.GetPoint(distance);
-            var yHalfScale = currentUnit.transform.localScale.y * 0.5f;
             var unitNewPosition = wP + Vector3.up;
             currentUnit.transform.position = unitNewPosition;
         }
@@ -60,47 +58,39 @@ public class UnitMove : MonoBehaviour
 
         if (currentUnit != null && Physics.Raycast(currentUnit.GetRaycastPos(), Vector3.down, out RaycastHit hit, 100))
         {
-            currentUnit.IsDragging = false;
-
             if (hit.collider.CompareTag("Tile"))
             {
                 var tile = hit.collider.gameObject.GetComponent<Tile>();
-                if (tile.HasUnit() && mergeUnit.MergeTwoUnit(currentUnit, (Unit)tile.GetCreature()))
-                {
-                    currentUnit.transform.position = tile.transform.position;
-                    _lastPosition = tile.transform.position;
-                    tile.SetCreature(currentUnit);
-                    currentUnit.ClearUnitTile();
-                    currentUnit.SetTile(tile);
-                }
-                else if (tile.HasUnit())
-                {
-                    currentUnit.transform.position = _lastPosition;
-                }
+                if (tile.HasUnit() && mergeUnit.TryMergeTwoUnit(currentUnit, (Unit)tile.GetCreature()))
+                    ReplaceUnit(tile, currentUnit);
+                else if (!tile.HasUnit())
+                    ReplaceUnit(tile, currentUnit);
                 else
-                {
-                    currentUnit.transform.position = tile.transform.position;
-                    _lastPosition = tile.transform.position;
-                    tile.SetCreature(currentUnit);
-                    currentUnit.ClearUnitTile();
-                    currentUnit.SetTile(tile);
-                }
-
-                Events.OnMove?.Invoke();
-
+                    currentUnit.transform.position = _lastPosition;
             }
             else
             {
                 currentUnit.transform.position = _lastPosition;
             }
-            currentUnit = null;
+
         }
         else if (currentUnit != null)
         {
-            currentUnit.IsDragging = false;
             currentUnit.transform.position = _lastPosition;
-            currentUnit = null;
+            currentUnit.IsDragging = false;
         }
 
+        currentUnit = null;
+        Events.OnMove?.Invoke();
     }
+
+    private void ReplaceUnit(Tile tile, Unit currentUnit)
+    {
+        currentUnit.transform.position = tile.transform.position;
+        _lastPosition = tile.transform.position;
+        tile.SetCreature(currentUnit);
+        currentUnit.ClearUnitTile();
+        currentUnit.SetTile(tile);
+    }
+
 }

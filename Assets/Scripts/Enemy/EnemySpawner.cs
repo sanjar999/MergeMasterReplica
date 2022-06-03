@@ -19,12 +19,15 @@ public class EnemySpawner : MonoBehaviour
 
     public List<Enemy> GetEnemies() => _enemies;
 
-    public bool HasEnemy()
+    public bool HasEnemy
     {
-        foreach (var enemy in _enemies)
-            if (enemy != null)
-                return true;
-        return false;
+        get
+        {
+            foreach (var enemy in _enemies)
+                if (enemy != null)
+                    return true;
+            return false;
+        }
     }
 
     private void Start()
@@ -33,19 +36,20 @@ public class EnemySpawner : MonoBehaviour
         _tiles = _tileSpawner.GetRedTiles();
         _level = Mathf.Clamp(currentStage / _levelUpStep, 1, int.MaxValue);
         _enemyAmount = Mathf.Clamp(currentStage / _amountIncraseStep, 1 , int.MaxValue);
-        SpawnEnemeis(_enemyAmount);
+        SpawnEnemeis();
     }
 
-    private void SpawnEnemeis(int amount)
+    private void SpawnEnemeis()
     {
-        while (amount != 0)
+        if (!_tileSpawner.HasEmptyRedTile())
+            return;
+
+        while (_enemyAmount != 0)
         {
             var randomRangedTile = GetRandomRangedTile(_tiles, _tileSpawner);
 
             if (_tileSpawner.HasEmptyRedTile() && randomRangedTile.HasUnit())
                 continue;
-            else if (!_tileSpawner.HasEmptyRedTile())
-                return;
             else
             {
                 var enemyIndex = UnityEngine.Random.Range(0, _enemyTypes.Length);
@@ -58,7 +62,7 @@ public class EnemySpawner : MonoBehaviour
                 //instance.SetTile(randomRangedTile);
                 instance.transform.position = randomRangedTile.transform.position;
             }
-            amount--;
+            _enemyAmount--;
         }
     }
 

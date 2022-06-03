@@ -58,7 +58,7 @@ public class Unit : Creature
 
     protected override void Attack()
     {
-        if (!_enemySpawner.HasEnemy() && !_isWin)
+        if (!_enemySpawner.HasEnemy&& !_isWin)
         {
             _isWin = true;
             _agent.isStopped = true;

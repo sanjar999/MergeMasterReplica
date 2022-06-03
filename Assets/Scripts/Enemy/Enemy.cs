@@ -59,9 +59,6 @@ public class Enemy : Creature
         _health = _level * _lvlUpHpIncrease;
         _damage = _level * _lvlUpDmgIncrease;
     }
-
-    private Unit CreatureToUnit(Creature c) => c as Unit;
-    private void GetEnemies() { _enemies = _unitSpawner.GetUnits().ConvertAll(new Converter<Unit, Creature>(CreatureToUnit)); }
     protected override void Attack()
     {
         if (!_unitSpawner.HasUnit && !_isLose)
@@ -74,4 +71,8 @@ public class Enemy : Creature
         }
         base.Attack();
     }
+
+    private Unit CreatureToUnit(Creature c) => c as Unit;
+    private void GetEnemies() { _enemies = _unitSpawner.GetUnits().ConvertAll(new Converter<Unit, Creature>(CreatureToUnit)); }
+
 }

@@ -4,8 +4,7 @@ using UnityEngine;
 public class GameProgress : MonoBehaviour
 {
     [SerializeField] UnitSpawner _unitSpawner;
-    [SerializeField] UnitMove _unitMove;
-    private List<Unit> _units = new List<Unit>();
+    private List<Unit> _units = new();
 
     private void Start()
     {
@@ -35,4 +34,10 @@ public class GameProgress : MonoBehaviour
             PlayerPrefs.SetInt($"units_{i}_type", (int)_units[i].GetUnitType());
         }
     }
+
+    public int GetSvedUnitsCount() => PlayerPrefs.GetInt("units_count", 0);
+    public int GetSvedUnitLevel(int index) => PlayerPrefs.GetInt ($"units_{index}_level", 0);
+    public int GetSvedUnitIndexX(int index) => PlayerPrefs.GetInt($"unitTile_{index}_x",  0);
+    public int GetSvedUnitIndexY(int index) => PlayerPrefs.GetInt($"unitTile_{index}_y",  0);
+    public int GetSvedUnitType(int index) => PlayerPrefs.GetInt  ($"units_{index}_type", 0);
 }

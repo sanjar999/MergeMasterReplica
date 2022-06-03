@@ -1,13 +1,14 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UnitSpawner : MonoBehaviour
 {
-    [SerializeField] Unit[] _unitTypes;
     [SerializeField] EnemySpawner _enemySpawner;
     [SerializeField] TileSpawner _tileSpawner;
+    [SerializeField] GameProgress _gameProgress;
+
+    [SerializeField] Unit[] _unitTypes;
     [SerializeField] Button _spawnMelee;
     [SerializeField] Button _spawnRange;
     [SerializeField] Transform _parent;
@@ -38,7 +39,7 @@ public class UnitSpawner : MonoBehaviour
     private void SpawnUnit(Unit.UnitType unitType)
     {
 
-        var randomTile = _tiles[UnityEngine.Random.Range(0, _tiles.Count)];
+        var randomTile = _tiles[Random.Range(0, _tiles.Count)];
 
         if (!_tileSpawner.HasEmptyTile() || !randomTile.HasUnit())
         {
@@ -49,10 +50,8 @@ public class UnitSpawner : MonoBehaviour
                 var instance = Instantiate(_unitTypes[(int)unitType]);
                 _units.Add(instance);
                 randomTile.SetCreature(instance);
-
                 instance.SetUnitType(unitType);
                 instance.SetEnemySpawner(_enemySpawner);
-                //instance.SetCoord(randomTile.GetCoord());
                 instance.SetTile(randomTile);
                 instance.transform.position = randomTile.transform.position;
             }
@@ -64,13 +63,13 @@ public class UnitSpawner : MonoBehaviour
 
     private void RestoreProgress()
     {
-        int unitCount = PlayerPrefs.GetInt("units_count", 0);
+        int unitCount = _gameProgress.GetSvedUnitsCount();
         for (int i = 0; i < unitCount; i++)
         {
-            var unitLevel = PlayerPrefs.GetInt($"units_{i}_level");
-            var unitTileX = PlayerPrefs.GetInt($"unitTile_{i}_x");
-            var unitTileY = PlayerPrefs.GetInt($"unitTile_{i}_y");
-            var unitType = PlayerPrefs.GetInt($"units_{i}_type");
+            var unitLevel = _gameProgress.GetSvedUnitLevel(i);
+            var unitTileX = _gameProgress.GetSvedUnitIndexX(i);
+            var unitTileY = _gameProgress.GetSvedUnitIndexY(i);
+            var unitType = _gameProgress.GetSvedUnitType(i);
             var instance = Instantiate(_unitTypes[unitType]);
             _units.Add(instance);
 

@@ -6,29 +6,19 @@ public class UI : MonoBehaviour
 {
     [SerializeField] private Button _fightBtn;
     [SerializeField] private TMP_Text _stageNumber;
-    [SerializeField] private TMP_Text _fps;
     [SerializeField] private StageManager _stageManager;
-    [SerializeField, Range(0.1f, 2f)] private float sampleDuration = 1f;
-
-    private int frames;
-    private float duration;
-
-    //private void OnEnable()
-    //{
-    //    Events.OnWin += UpdateStageText;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    Events.OnWin -= UpdateStageText;
-    //}
 
     private void Start()
     {
         _stageNumber.text = _stageManager.GetCurrentStage().ToString();
         _fightBtn.onClick.AddListener(() => Events.OnFight?.Invoke());
-        //UpdateStageText();
     }
+
+    #region FPS
+    [SerializeField] private TMP_Text _fps;
+    [SerializeField, Range(0.1f, 2f)] private float sampleDuration = 1f;
+    private int frames;
+    private float duration;
 
     private void Update()
     {
@@ -47,9 +37,5 @@ public class UI : MonoBehaviour
             duration = 0f;
         }
     }
-
-    //private void UpdateStageText()
-    //{
-    //    _stageNumber.text = _stageManager.GetCurrentStage().ToString();
-    //}
+    #endregion
 }

@@ -440,12 +440,9 @@ GameObject:
   - component: {fileID: 8181054444255350918}
   - component: {fileID: 7480661055855601212}
   - component: {fileID: 689799337508244671}
-  - component: {fileID: 1635280724}
-  - component: {fileID: 7777719594063552117}
-  - component: {fileID: 6714971660598626688}
   m_Layer: 0
   m_Name: robo3
-  m_TagString: Unit
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -547,45 +544,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1635280724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2339699850708520990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99f7092d2e1484a93908b5f5ec8da87c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &7777719594063552117
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2339699850708520990}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0, y: 0.11755484, z: 0}
-  m_Center: {x: 0.00032977143, y: -0.16468805, z: -0.0069268756}
---- !u!136 &6714971660598626688
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2339699850708520990}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.03839955
-  m_Height: 0.13592394
-  m_Direction: 1
-  m_Center: {x: -0.0015541253, y: 0.0034046704, z: -0.00912082}
 --- !u!1 &2916413607250927862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,7 +1417,7 @@ GameObject:
   - component: {fileID: 5561867855431828968}
   m_Layer: 0
   m_Name: HumanRobotEnemy
-  m_TagString: Unit
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
