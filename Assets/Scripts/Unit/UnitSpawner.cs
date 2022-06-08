@@ -30,8 +30,8 @@ public class UnitSpawner : MonoBehaviour
 
     private void Start()
     {
-        _spawnMelee.onClick.AddListener(()=> SpawnUnit(Unit.UnitType.melee));
-        _spawnRange.onClick.AddListener(()=> SpawnUnit(Unit.UnitType.range));
+        _spawnMelee.onClick.AddListener(() => SpawnUnit(Unit.UnitType.melee));
+        _spawnRange.onClick.AddListener(() => SpawnUnit(Unit.UnitType.range));
         _tiles = _tileSpawner.GetTiles();
         RestoreProgress();
     }
@@ -39,22 +39,20 @@ public class UnitSpawner : MonoBehaviour
     private void SpawnUnit(Unit.UnitType unitType)
     {
 
+        if (!_tileSpawner.HasEmptyTile())
+            return;
+
         var randomTile = _tiles[Random.Range(0, _tiles.Count)];
 
-        if (!_tileSpawner.HasEmptyTile() || !randomTile.HasUnit())
+        if (!randomTile.HasUnit())
         {
-            if (!_tileSpawner.HasEmptyTile())
-                return;
-            else
-            {
-                var instance = Instantiate(_unitTypes[(int)unitType]);
-                _units.Add(instance);
-                randomTile.SetCreature(instance);
-                instance.SetUnitType(unitType);
-                instance.SetEnemySpawner(_enemySpawner);
-                instance.SetTile(randomTile);
-                instance.transform.position = randomTile.transform.position;
-            }
+            var instance = Instantiate(_unitTypes[(int)unitType]);
+            _units.Add(instance);
+            randomTile.SetCreature(instance);
+            instance.SetUnitType(unitType);
+            instance.SetEnemySpawner(_enemySpawner);
+            instance.SetTile(randomTile);
+            instance.transform.position = randomTile.transform.position;
         }
         else SpawnUnit(unitType);
 

@@ -35,24 +35,24 @@ public class EnemySpawner : MonoBehaviour
         var currentStage = _stageManager.GetCurrentStage();
         _tiles = _tileSpawner.GetRedTiles();
         _level = Mathf.Clamp(currentStage / _levelUpStep, 1, int.MaxValue);
-        _enemyAmount = Mathf.Clamp(currentStage / _amountIncraseStep, 1 , int.MaxValue);
+        _enemyAmount = Mathf.Clamp(currentStage / _amountIncraseStep, 1, 20);
         SpawnEnemeis();
     }
 
     private void SpawnEnemeis()
     {
-        if (!_tileSpawner.HasEmptyRedTile())
-            return;
-
         while (_enemyAmount != 0)
         {
             var randomRangedTile = GetRandomRangedTile(_tiles, _tileSpawner);
 
-            if (_tileSpawner.HasEmptyRedTile() && randomRangedTile.HasUnit())
+            if (!_tileSpawner.HasEmptyRedTile())
+                return;
+
+            if (randomRangedTile.HasUnit())
                 continue;
             else
             {
-                var enemyIndex = UnityEngine.Random.Range(0, _enemyTypes.Length);
+                var enemyIndex = rnd.Range(0, _enemyTypes.Length);
                 var instance = Instantiate(_enemyTypes[enemyIndex]);
 
                 _enemies.Add(instance);
@@ -68,12 +68,11 @@ public class EnemySpawner : MonoBehaviour
 
     private Tile GetRandomMeleeTile(List<Tile> tiles, TileSpawner tileSpawner)
     {
-        return tiles[rnd.Range(0, 2) + (tileSpawner.GetWidth() - 1) * rnd.Range(0, tileSpawner.GetHeight())];
+        return tiles[rnd.Range(0, 2) + (tileSpawner.GetWidth()) * rnd.Range(0, tileSpawner.GetHeight())];
     }
 
     private Tile GetRandomRangedTile(List<Tile> tiles, TileSpawner tileSpawner)
     {
-        return tiles[rnd.Range(0, 4) + (tileSpawner.GetWidth() - 1) * rnd.Range(0, tileSpawner.GetHeight())];
+        return tiles[rnd.Range(0, 5) + (tileSpawner.GetWidth()) * rnd.Range(0, tileSpawner.GetHeight())];
     }
-
 }

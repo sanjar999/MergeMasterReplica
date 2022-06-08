@@ -617,8 +617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fightBtn: {fileID: 1980326505}
   _stageNumber: {fileID: 1697761179}
-  _fps: {fileID: 2031396684}
   _stageManager: {fileID: 1180126792}
+  _fps: {fileID: 2031396684}
   sampleDuration: 1
 --- !u!1 &727477958
 GameObject:
@@ -1142,11 +1142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a766448b5fb484ef98044c89d2bb7835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemySpawner: {fileID: 1180126791}
+  _tileSpawner: {fileID: 1180126793}
+  _gameProgress: {fileID: 1180126789}
   _unitTypes:
   - {fileID: 4077059660630877897, guid: b8ae8c22c930f477fa58ac8e7064f87a, type: 3}
   - {fileID: 675763351393775156, guid: 316f0d455aeae4936b9b3836fec03b9c, type: 3}
-  _enemySpawner: {fileID: 1180126791}
-  _tileSpawner: {fileID: 1180126793}
   _spawnMelee: {fileID: 424522572}
   _spawnRange: {fileID: 2077834946}
   _parent: {fileID: 727477959}
@@ -1176,7 +1177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitSpawner: {fileID: 1180126787}
-  _unitMove: {fileID: 1180126785}
 --- !u!114 &1180126791
 MonoBehaviour:
   m_ObjectHideFlags: 0
