@@ -80,6 +80,4 @@ public class Creature : MonoBehaviour
             transform.LookAt(new Vector3(_target.transform.position.x, transform.position.y, _target.transform.position.z));
     }
     public void StartFightAnim() { _animator.SetBool("isAttack", true); }
-
-
 }
