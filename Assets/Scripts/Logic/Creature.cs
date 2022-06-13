@@ -8,6 +8,7 @@ public class Creature : MonoBehaviour
     [SerializeField] protected Animator _animator;
     [SerializeField] protected float _health = 80;
     [SerializeField] protected float _damage = 2;
+
     protected NavMeshAgent _agent;
     protected Creature _target;
     protected int _level = 1;
@@ -56,7 +57,6 @@ public class Creature : MonoBehaviour
     }
 
     public virtual void LevelUp() { _level++; Events.OnLevelUp?.Invoke(); }
-
 
     protected virtual void Attack()
     {

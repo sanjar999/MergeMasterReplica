@@ -11,6 +11,7 @@ public class Unit : Creature
     [SerializeField] protected float _lvlUpHpIncrease = 10f;
     [SerializeField] protected float _lvlUpDefIncrease = .1f;
     [SerializeField] protected float _lvlUpDmgIncrease = .4f;
+    [SerializeField] private bool _isFromScroller;
 
     protected Tile _unitTile;
     protected UnitType _unitType;
@@ -19,6 +20,7 @@ public class Unit : Creature
 
     public enum UnitType { range, melee }
     public bool IsDragging { get; set; }
+    public bool IsFromScroller() => _isFromScroller;
     public void SetTile(Tile tile) { _unitTile = tile; }
     public Tile GetTile() => _unitTile;
     public void SetEnemySpawner(EnemySpawner enemySpawner) { _enemySpawner = enemySpawner; }
@@ -91,7 +93,11 @@ public class Unit : Creature
     }
 
     private Enemy CreatureToUnit(Creature c) => c as Enemy;
-    public void ClearUnitTile() { _unitTile.SetCreature(null); }
+    public void TryClearUnitTile()
+    {
+        if (_unitTile)
+            _unitTile.SetCreature(null);
+    }
 
     public void SetAgentSpeed(float speed)
     {

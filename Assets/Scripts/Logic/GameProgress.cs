@@ -13,12 +13,12 @@ public class GameProgress : MonoBehaviour
     private void OnEnable()
     {
         Events.OnSpawn += SaveData;
-        Events.OnMove += SaveData;
+        Events.OnMoveEnd += SaveData;
     }
     private void OnDisable()
     {
         Events.OnSpawn -= SaveData;
-        Events.OnMove -= SaveData;
+        Events.OnMoveEnd -= SaveData;
     }
 
     private void SaveData()

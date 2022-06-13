@@ -11,7 +11,7 @@ public class MergeUnit : MonoBehaviour
             return false;
 
         unit_1.LevelUp();
-        unit_2.ClearUnitTile();
+        unit_2.TryClearUnitTile();
         _unitSpawner.GetUnits().Remove(unit_2);
         Destroy(unit_2.gameObject);
         return true;

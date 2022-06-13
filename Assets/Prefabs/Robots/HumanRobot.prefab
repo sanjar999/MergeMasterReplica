@@ -1485,6 +1485,7 @@ MonoBehaviour:
   _animator: {fileID: 4439439038103609356}
   _health: 80
   _damage: 2
+  _isFromScroller: 0
   _raycastPos: {fileID: 922318281932185951}
   _defence: 0.5
   _lvlUpHpIncrease: 10
