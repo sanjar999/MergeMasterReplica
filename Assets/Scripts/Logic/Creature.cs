@@ -56,7 +56,14 @@ public class Creature : MonoBehaviour
         }
     }
 
-    public virtual void LevelUp(int diff) { _level+=diff; Events.OnLevelUp?.Invoke(); }
+    public virtual void LevelUp(int sum)
+    {
+        print(_level);
+
+        _level = sum;
+        print(_level);
+        Events.OnLevelUp?.Invoke();
+    }
 
     protected virtual void Attack()
     {

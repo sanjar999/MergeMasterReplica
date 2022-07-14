@@ -10,8 +10,9 @@ public class MergeUnit : MonoBehaviour
              unit_1.GetUnitType() != unit_2.GetUnitType())
             return false;
 
-        int diff = Mathf.Abs(unit_1.GetLevel()- unit_2.GetLevel());
-        unit_1.LevelUp(diff);
+        int sum = Mathf.Abs(unit_1.GetLevel() + unit_2.GetLevel());
+        print(sum);
+        unit_1.LevelUp(sum);
         unit_2.TryClearUnitTile();
         _unitSpawner.GetUnits().Remove(unit_2);
         Destroy(unit_2.gameObject);
