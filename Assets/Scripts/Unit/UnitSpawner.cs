@@ -9,8 +9,7 @@ public class UnitSpawner : MonoBehaviour
     [SerializeField] GameProgress _gameProgress;
 
     [SerializeField] Unit[] _unitTypes;
-    [SerializeField] Button _spawnMelee;
-    [SerializeField] Button _spawnRange;
+    [SerializeField] Button _spawnUnit;
     [SerializeField] Transform _parent;
 
     private List<Unit> _units = new List<Unit>();
@@ -30,8 +29,7 @@ public class UnitSpawner : MonoBehaviour
 
     private void Start()
     {
-        _spawnMelee.onClick.AddListener(() => SpawnUnit(Unit.UnitType.melee));
-        _spawnRange.onClick.AddListener(() => SpawnUnit(Unit.UnitType.range));
+        _spawnUnit.onClick.AddListener(() => SpawnUnit(Unit.UnitType.range));
         _tiles = _tileSpawner.GetTiles();
         RestoreProgress();
     }
