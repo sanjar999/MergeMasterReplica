@@ -29,13 +29,15 @@ public class UnitSpawner : MonoBehaviour
 
     private void Start()
     {
-        _spawnUnit.onClick.AddListener(() => SpawnUnit(Unit.UnitType.range));
+        var randomUnit = (Unit.UnitType)Random.Range(0, (int)Unit.UnitType.length);
+        _spawnUnit.onClick.AddListener(() => SpawnUnit());
         _tiles = _tileSpawner.GetTiles();
         RestoreProgress();
     }
 
-    private void SpawnUnit(Unit.UnitType unitType)
+    private void SpawnUnit()
     {
+        var randomUnitType = (Unit.UnitType)Random.Range(0, (int)Unit.UnitType.length);
 
         if (!_tileSpawner.HasEmptyTile())
             return;
@@ -44,15 +46,15 @@ public class UnitSpawner : MonoBehaviour
 
         if (!randomTile.HasUnit())
         {
-            var instance = Instantiate(_unitTypes[(int)unitType]);
+            var instance = Instantiate(_unitTypes[(int)randomUnitType]);
             _units.Add(instance);
             randomTile.SetCreature(instance);
-            instance.SetUnitType(unitType);
+            instance.SetUnitType(randomUnitType);
             instance.SetEnemySpawner(_enemySpawner);
             instance.SetTile(randomTile);
             instance.transform.position = randomTile.transform.position;
         }
-        else SpawnUnit(unitType);
+        else SpawnUnit();
 
         Events.OnSpawn?.Invoke();
     }

@@ -18,7 +18,7 @@ public class Unit : Creature
     protected EnemySpawner _enemySpawner;
     protected bool _isWin;
 
-    public enum UnitType { range, melee }
+    public enum UnitType { reddy, greenSpy, scorpy, lazer, pyro, cryo , length }
     public bool IsDragging { get; set; }
     public bool IsFromScroller() => _isFromScroller;
     public void SetTile(Tile tile) { _unitTile = tile; }
