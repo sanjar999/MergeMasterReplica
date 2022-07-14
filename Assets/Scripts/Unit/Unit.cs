@@ -78,9 +78,9 @@ public class Unit : Creature
         _defence = _level * _lvlUpDefIncrease;
     }
 
-    public override void LevelUp()
+    public override void LevelUp(int diff)
     {
-        base.LevelUp();
+        base.LevelUp(diff);
         _health = _level * _lvlUpHpIncrease;
         _defence = _level * _lvlUpDefIncrease;
         _damage = _level * _lvlUpDmgIncrease;

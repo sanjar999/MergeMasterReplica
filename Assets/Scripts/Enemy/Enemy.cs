@@ -53,9 +53,9 @@ public class Enemy : Creature
         _damage = _level * _lvlUpDmgIncrease;
     }
 
-    public override void LevelUp()
+    public override void LevelUp(int diff)
     {
-        base.LevelUp();
+        base.LevelUp(diff);
         _health = _level * _lvlUpHpIncrease;
         _damage = _level * _lvlUpDmgIncrease;
     }
