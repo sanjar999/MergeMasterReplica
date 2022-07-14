@@ -65,11 +65,11 @@ public class Unit : Creature
             _isWin = true;
             _agent.isStopped = true;
             _animator.SetBool("isAttack", false);
-            Events.OnWin?.Invoke();
             return;
         }
         base.Attack();
     }
+
     public override void SetLevel(int level)
     {
         base.SetLevel(level);

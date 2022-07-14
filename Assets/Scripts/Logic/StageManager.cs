@@ -16,6 +16,7 @@ public class StageManager : MonoBehaviour
 
     private void StageUp()
     {
+        print("STAGE UP");
         var stage = PlayerPrefs.GetInt("stage", 1);
         stage++;
         PlayerPrefs.SetInt("stage", stage);

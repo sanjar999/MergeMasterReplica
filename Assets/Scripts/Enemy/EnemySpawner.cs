@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     private List<Enemy> _enemies = new();
     private List<Tile> _tiles = new();
     private int _level = 1;
-
+    private bool _isWon = false;
     public List<Enemy> GetEnemies() => _enemies;
 
     public bool HasEnemy
@@ -26,6 +26,11 @@ public class EnemySpawner : MonoBehaviour
             foreach (var enemy in _enemies)
                 if (enemy != null)
                     return true;
+            if (!_isWon)
+            {
+                Events.OnWin?.Invoke();
+                _isWon = true;
+            }
             return false;
         }
     }
