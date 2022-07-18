@@ -53,6 +53,7 @@ public class UnitSpawner : MonoBehaviour
             instance.SetEnemySpawner(_enemySpawner);
             instance.SetTile(randomTile);
             instance.transform.position = randomTile.transform.position;
+            instance.transform.SetParent(_parent);
         }
         else SpawnUnit();
 
@@ -82,6 +83,8 @@ public class UnitSpawner : MonoBehaviour
             instance.SetTile(unitTile);
             //index to position
             instance.transform.position = unitTile.transform.position;
+            instance.transform.SetParent(_parent);
+
         }
     }
 }

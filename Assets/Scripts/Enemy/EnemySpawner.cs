@@ -66,6 +66,7 @@ public class EnemySpawner : MonoBehaviour
                 instance.SetLevel(_level);
                 //instance.SetTile(randomRangedTile);
                 instance.transform.position = randomRangedTile.transform.position;
+                instance.transform.SetParent(_parent);
             }
             _enemyAmount--;
         }
