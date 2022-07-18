@@ -326,7 +326,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937327049}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.068, y: 0.068, z: 0.068}
   m_ConstrainProportionsScale: 1
@@ -335,7 +335,7 @@ RectTransform:
   - {fileID: 603908616}
   m_Father: {fileID: 5115386581201704883}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 2.73}
@@ -1207,11 +1207,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5115386581201704883}
   - component: {fileID: 919132147869222968}
-  - component: {fileID: 919132147869222967}
   - component: {fileID: 919132147869222966}
   - component: {fileID: 919132147869222965}
+  - component: {fileID: 751349806227526181}
   m_Layer: 0
-  m_Name: Lazer
+  m_Name: LazerRobot Enemy
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1224,7 +1224,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5599751502616038665}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
@@ -1235,7 +1235,7 @@ Transform:
   - {fileID: 937327050}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &919132147869222968
 Animator:
   serializedVersion: 4
@@ -1256,27 +1256,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &919132147869222967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5599751502616038665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d3202e690fd9442e95764973aae0402, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 919132147869222968}
-  _health: 80
-  _damage: 2
-  _raycastPos: {fileID: 1739247490}
-  _defence: 0.5
-  _lvlUpHpIncrease: 10
-  _lvlUpDefIncrease: 0.1
-  _lvlUpDmgIncrease: 0.4
-  _isFromScroller: 0
 --- !u!114 &919132147869222966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1292,7 +1271,7 @@ MonoBehaviour:
   _canvas: {fileID: 937327053}
   _levelNum: {fileID: 1576107660}
   _healthSlider: {fileID: 603908615}
-  _creature: {fileID: 919132147869222967}
+  _creature: {fileID: 751349806227526181}
 --- !u!195 &919132147869222965
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1315,6 +1294,23 @@ NavMeshAgent:
   m_BaseOffset: -0.61
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
+--- !u!114 &751349806227526181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5599751502616038665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae03cb613a05547f380293181aacdc35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 919132147869222968}
+  _health: 80
+  _damage: 2
+  _lvlUpHpIncrease: 10
+  _lvlUpDmgIncrease: 0.4
 --- !u!1 &5601584164208605820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,8 +1478,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 0, z: 0.02263696}
-  m_Center: {x: -0.00060767814, y: 0.0016076087, z: -0.01894911}
+  m_Size: {x: 0, y: 0, z: 0.016238248}
+  m_Center: {x: -0.00060767814, y: 0.0016076082, z: -0.015749758}
 --- !u!136 &7168469752835644624
 CapsuleCollider:
   m_ObjectHideFlags: 0

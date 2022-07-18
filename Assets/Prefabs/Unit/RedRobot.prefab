@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 919132148070475714}
   - component: {fileID: 919132148070475713}
   m_Layer: 0
-  m_Name: Reddy
+  m_Name: RedRobot
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

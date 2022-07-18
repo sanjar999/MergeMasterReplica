@@ -1593,7 +1593,7 @@ GameObject:
   - component: {fileID: 7641088340121155517}
   - component: {fileID: 7641088340121155518}
   m_Layer: 0
-  m_Name: GreenSpy Enemy
+  m_Name: GreenRobot Enemy
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

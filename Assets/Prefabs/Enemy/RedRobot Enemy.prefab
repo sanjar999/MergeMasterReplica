@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 7146094910005408008}
   - component: {fileID: 7146094910005408011}
   m_Layer: 0
-  m_Name: Reddy Enemy
+  m_Name: RedRobot Enemy
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

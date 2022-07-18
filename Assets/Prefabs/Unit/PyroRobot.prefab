@@ -328,7 +328,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140134761}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.067999996, y: 0.067999996, z: 0.067999996}
   m_ConstrainProportionsScale: 0
@@ -337,10 +337,10 @@ RectTransform:
   - {fileID: 362401157}
   m_Father: {fileID: 5464628113421264648}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.233}
+  m_AnchoredPosition: {x: 0, y: 1.43}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1140134765
@@ -771,7 +771,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629360317309514113}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.56, z: 0}
   m_LocalScale: {x: 56.991543, y: 56.991543, z: 56.991543}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -920,11 +920,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5464628113421264648}
   - component: {fileID: 919132148692682270}
+  - component: {fileID: 919132148692682269}
   - component: {fileID: 919132148692682268}
   - component: {fileID: 919132148692682267}
-  - component: {fileID: 775384947315871061}
   m_Layer: 0
-  m_Name: FireRobo Enemy
+  m_Name: PyroRobot
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -937,7 +937,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4656039202421882290}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
   m_ConstrainProportionsScale: 1
@@ -948,7 +948,7 @@ Transform:
   - {fileID: 1140134762}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &919132148692682270
 Animator:
   serializedVersion: 4
@@ -969,6 +969,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &919132148692682269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656039202421882290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3202e690fd9442e95764973aae0402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 919132148692682270}
+  _health: 80
+  _damage: 2
+  _raycastPos: {fileID: 701308857}
+  _defence: 0.5
+  _lvlUpHpIncrease: 10
+  _lvlUpDefIncrease: 0.1
+  _lvlUpDmgIncrease: 0.4
+  _isFromScroller: 0
 --- !u!114 &919132148692682268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -984,7 +1005,7 @@ MonoBehaviour:
   _canvas: {fileID: 1140134765}
   _levelNum: {fileID: 1646337659}
   _healthSlider: {fileID: 362401158}
-  _creature: {fileID: 775384947315871061}
+  _creature: {fileID: 919132148692682269}
 --- !u!195 &919132148692682267
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1004,26 +1025,9 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!114 &775384947315871061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4656039202421882290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae03cb613a05547f380293181aacdc35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 919132148692682270}
-  _health: 80
-  _damage: 2
-  _lvlUpHpIncrease: 10
-  _lvlUpDmgIncrease: 0.4
 --- !u!1 &4741522660310165114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,7 +1311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7719956438356235183}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.512, z: 0.05}
   m_LocalScale: {x: 10.213212, y: 10.213212, z: 22.84117}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1408,8 +1412,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 0.1177748, z: 0}
-  m_Center: {x: 0.00985104, y: -0.13172768, z: 0.0024747914}
+  m_Size: {x: 0, y: 0.10536841, z: 0}
+  m_Center: {x: -0.010515146, y: -0.16762196, z: -0.0011370773}
 --- !u!136 &3993046434846158713
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1420,10 +1424,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.02600168
-  m_Height: 0.12078257
+  m_Radius: 0.026001683
+  m_Height: 0.116302066
   m_Direction: 1
-  m_Center: {x: -0.0022967125, y: 0.012035022, z: -0.006472357}
+  m_Center: {x: -0.0022967125, y: 0.014275281, z: -0.006472357}
 --- !u!114 &3993046434846158712
 MonoBehaviour:
   m_ObjectHideFlags: 0
