@@ -58,7 +58,10 @@ public class Unit : Creature
         if (_animator)
             _animator.SetFloat("Blend", _agent.velocity.magnitude);
     }
-    private void GetEnemies() { _enemies = _enemySpawner.GetEnemies().ConvertAll(new Converter<Enemy, Creature>(CreatureToUnit)); }
+    private void GetEnemies()
+    {
+            _enemies = _enemySpawner.GetEnemies().ConvertAll(new Converter<Enemy, Creature>(CreatureToUnit));
+    }
 
     protected override void Attack()
     {

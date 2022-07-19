@@ -74,6 +74,9 @@ public class Enemy : Creature
     }
 
     private Unit CreatureToUnit(Creature c) => c as Unit;
-    private void GetEnemies() { _enemies = _unitSpawner.GetUnits().ConvertAll(new Converter<Unit, Creature>(CreatureToUnit)); }
+    private void GetEnemies()
+    {
+            _enemies = _unitSpawner.GetUnits().ConvertAll(new Converter<Unit, Creature>(CreatureToUnit));
+    }
 
 }
