@@ -42,21 +42,12 @@ public class UnitMove : MonoBehaviour
 
     private void SelectUnit(Ray ray, ref Unit currentUnit, ref Vector3 lastPosition)
     {
-        Events.OnMoveStart?.Invoke();
-
         _isSelected = true;
         _isUnselected = false;
-
-    
 
         if (Physics.Raycast(ray, out RaycastHit hit, 1000) && hit.collider.CompareTag("Unit"))
         {
             currentUnit = hit.collider.gameObject.GetComponentInParent<Unit>();
-            if (currentUnit.IsFromScroller())
-            {
-                currentUnit.transform.parent = null;
-                currentUnit.transform.eulerAngles =Vector3.zero;
-            }
             lastPosition = currentUnit.transform.position;
             currentUnit.IsDragging = true;
         }

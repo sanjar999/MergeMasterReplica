@@ -13,6 +13,7 @@ public class Unit : Creature
     [SerializeField] protected float _lvlUpDmgIncrease = .4f;
     [SerializeField] private bool _isFromScroller;
 
+
     protected Tile _unitTile;
     protected UnitType _unitType;
     protected EnemySpawner _enemySpawner;
@@ -20,7 +21,6 @@ public class Unit : Creature
 
     public enum UnitType { reddy, greenSpy, scorpy, lazer, pyro, cryo , length }
     public bool IsDragging { get; set; }
-    public bool IsFromScroller() => _isFromScroller;
     public void SetTile(Tile tile) { _unitTile = tile; }
     public Tile GetTile() => _unitTile;
     public void SetEnemySpawner(EnemySpawner enemySpawner) { _enemySpawner = enemySpawner; }
@@ -37,6 +37,8 @@ public class Unit : Creature
         Events.OnFight += StartFightAnim;
         Events.OnSpawn += GetEnemies;
         _agent = GetComponent<NavMeshAgent>();
+        _creatureStats.UpdateLevel(_level.ToString());
+        _creatureStats.SetHealthSlider(_health);
         GetEnemies();
     }
 

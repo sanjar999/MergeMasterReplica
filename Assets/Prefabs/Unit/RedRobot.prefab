@@ -758,6 +758,7 @@ MonoBehaviour:
   _animator: {fileID: 919132148070475716}
   _health: 80
   _damage: 2
+  _creatureStats: {fileID: 919132148070475714}
   _raycastPos: {fileID: 383486215}
   _defence: 0.5
   _lvlUpHpIncrease: 10

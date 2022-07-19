@@ -296,6 +296,7 @@ MonoBehaviour:
   _animator: {fileID: 2491756434208524644}
   _health: 80
   _damage: 2
+  _creatureStats: {fileID: 6834438958308397965}
   _lvlUpHpIncrease: 10
   _lvlUpDmgIncrease: 0.4
 --- !u!1 &1517829694586849488

@@ -8,6 +8,7 @@ public class Creature : MonoBehaviour
     [SerializeField] protected Animator _animator;
     [SerializeField] protected float _health = 80;
     [SerializeField] protected float _damage = 2;
+    [SerializeField] protected CreatureStats _creatureStats;
 
     protected NavMeshAgent _agent;
     protected Creature _target;
@@ -20,8 +21,6 @@ public class Creature : MonoBehaviour
 
     protected float damageOffset = 0;
     protected List<Creature> _enemies;
-
-
 
     public Creature GetClosestEnemy(List<Creature> enemies)
     {
@@ -41,13 +40,11 @@ public class Creature : MonoBehaviour
     protected virtual void DealDamage()
     {
         _target.GetComponent<Creature>().GetDamage(_damage * _level);
-        Events.OnDealDamage?.Invoke();
-
     }
     public virtual void GetDamage(float amount)
     {
         _health -= amount;
-        Events.OnGetDamage?.Invoke();
+        _creatureStats.UpdateHealth(_health);
         if (_health <= 0)
         {
             _agent.enabled = false;
@@ -58,11 +55,8 @@ public class Creature : MonoBehaviour
 
     public virtual void LevelUp(int sum)
     {
-        print(_level);
-
         _level = sum;
-        print(_level);
-        Events.OnLevelUp?.Invoke();
+        _creatureStats.UpdateLevel(_level.ToString());
     }
 
     protected virtual void Attack()

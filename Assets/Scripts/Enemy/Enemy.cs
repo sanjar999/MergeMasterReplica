@@ -24,7 +24,8 @@ public class Enemy : Creature
         Events.OnFight += () => _isFight = true;
         Events.OnFight += StartFightAnim;
         Events.OnSpawn += GetEnemies;
-
+        _creatureStats.SetHealthSlider(_health);
+        _creatureStats.UpdateLevel(_level.ToString());
         _agent = GetComponent<NavMeshAgent>();
         GetEnemies();
     }
