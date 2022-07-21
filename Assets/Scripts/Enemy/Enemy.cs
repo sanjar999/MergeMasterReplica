@@ -5,7 +5,7 @@ using UnityEngine.AI;
 public class Enemy : Creature
 {
     [SerializeField] protected float _lvlUpHpIncrease = 10f;
-    [SerializeField] protected float _lvlUpDmgIncrease = .4f;
+    [SerializeField] protected float _lvlUpDmgIncrease = .6f;
 
     protected EnemyType _enemyType;
     protected UnitSpawner _unitSpawner;
@@ -50,15 +50,15 @@ public class Enemy : Creature
     public override void SetLevel(int level)
     {
         base.SetLevel(level);
-        _health = _level * _lvlUpHpIncrease;
-        _damage = _level * _lvlUpDmgIncrease;
+        _health += _level * _lvlUpHpIncrease;
+        _damage += _level * _lvlUpDmgIncrease;
     }
 
     public override void LevelUp(int sum)
     {
         base.LevelUp(sum);
-        _health = _level * _lvlUpHpIncrease;
-        _damage = _level * _lvlUpDmgIncrease;
+        _health += _level * _lvlUpHpIncrease;
+        _damage += _level * _lvlUpDmgIncrease;
     }
     protected override void Attack()
     {

@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Events : MonoBehaviour
 {
-    public static Action OnDealDamage;
+    public static Action<int> OnDealDamage;
+    public static Action<int> OnBuyUnit;
     public static Action OnGetDamage;
     public static Action OnMoveStart;
     public static Action OnLevelUp;

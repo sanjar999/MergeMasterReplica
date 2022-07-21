@@ -6,12 +6,44 @@ public class UI : MonoBehaviour
 {
     [SerializeField] private Button _fightBtn;
     [SerializeField] private TMP_Text _stageNumber;
+    [SerializeField] private TMP_Text _coinsAmount;
+    [SerializeField] private TMP_Text _unitPrice;
     [SerializeField] private StageManager _stageManager;
+    [SerializeField] private GameProgress _gameProgress;
+
+    private void OnEnable()
+    {
+        Events.OnDealDamage += IncreaseCoinsAmount;
+        Events.OnBuyUnit += DecreaseCoinsAmount;
+        Events.OnSpawn += () => _unitPrice.text = _gameProgress.GetUnitPrice().ToString();
+    }
+
+    private void OnDisable()
+    {
+        Events.OnDealDamage -= IncreaseCoinsAmount;
+        Events.OnBuyUnit -= DecreaseCoinsAmount;
+        Events.OnSpawn -= () => _unitPrice.text = _gameProgress.GetUnitPrice().ToString();
+    }
 
     private void Start()
     {
         _stageNumber.text = _stageManager.GetCurrentStage().ToString();
         _fightBtn.onClick.AddListener(() => Events.OnFight?.Invoke());
+        _unitPrice.text = _gameProgress.GetUnitPrice().ToString();
+        _coinsAmount.text = _gameProgress.GetCoins().ToString();
+    }
+
+    public void IncreaseCoinsAmount(int amount)
+    {
+        var coins = _gameProgress.GetCoins() + (amount * _stageManager.GetCurrentStage());
+        _coinsAmount.text = coins.ToString();
+        _gameProgress.SetCoins(coins);
+    }
+    public void DecreaseCoinsAmount(int amount)
+    {
+        var coins = _gameProgress.GetCoins() + amount;
+        _coinsAmount.text = coins.ToString();
+        _gameProgress.SetCoins(coins);
     }
 
     #region FPS

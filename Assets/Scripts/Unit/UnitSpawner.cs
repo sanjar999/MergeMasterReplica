@@ -7,11 +7,10 @@ public class UnitSpawner : MonoBehaviour
     [SerializeField] EnemySpawner _enemySpawner;
     [SerializeField] TileSpawner _tileSpawner;
     [SerializeField] GameProgress _gameProgress;
-
+    [SerializeField] GameObject _buttonMask;
     [SerializeField] Unit[] _unitTypes;
     [SerializeField] Button _spawnUnit;
     [SerializeField] Transform _parent;
-
     private List<Unit> _units = new List<Unit>();
     private List<Tile> _tiles = new List<Tile>();
     public List<Unit> GetUnits() => _units;
@@ -33,10 +32,19 @@ public class UnitSpawner : MonoBehaviour
         _spawnUnit.onClick.AddListener(() => SpawnUnit());
         _tiles = _tileSpawner.GetTiles();
         RestoreProgress();
+        if (_gameProgress.GetCoins() >= _gameProgress.GetUnitPrice())
+            _buttonMask.SetActive(false);
+        else
+            _buttonMask.SetActive(true);
+
+
     }
 
     private void SpawnUnit()
     {
+        if (!CanBuyUnit())
+            return;
+
         var randomUnitType = (Unit.UnitType)Random.Range(0, (int)Unit.UnitType.length);
 
         if (!_tileSpawner.HasEmptyTile())
@@ -85,6 +93,27 @@ public class UnitSpawner : MonoBehaviour
             instance.transform.position = unitTile.transform.position;
             instance.transform.SetParent(_parent);
 
+        }
+    }
+
+    private bool CanBuyUnit()
+    {
+        float currUnitPrice = _gameProgress.GetUnitPrice();
+        if (_gameProgress.GetCoins() >= currUnitPrice)
+        {
+            //_gameProgress.SetCoins(_gameProgress.GetCoins() - (int)currUnitPrice);
+            Events.OnBuyUnit?.Invoke(-(int)currUnitPrice);
+            var newPrice = currUnitPrice += currUnitPrice * .25f;
+            _gameProgress.SetUnitPrice((int)newPrice);
+            if (_gameProgress.GetCoins() < currUnitPrice)
+            {
+                _buttonMask.SetActive(true);
+            }
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

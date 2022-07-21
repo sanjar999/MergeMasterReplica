@@ -9,8 +9,8 @@ public class Unit : Creature
     [SerializeField] protected float _defence = .5f;
 
     [SerializeField] protected float _lvlUpHpIncrease = 10f;
-    [SerializeField] protected float _lvlUpDefIncrease = .1f;
-    [SerializeField] protected float _lvlUpDmgIncrease = .4f;
+    [SerializeField] protected float _lvlUpDefIncrease = .2f;
+    [SerializeField] protected float _lvlUpDmgIncrease = .6f;
     [SerializeField] private bool _isFromScroller;
 
 
@@ -78,23 +78,29 @@ public class Unit : Creature
     public override void SetLevel(int level)
     {
         base.SetLevel(level);
-        _health = _level * _lvlUpHpIncrease;
-        _damage = _level * _lvlUpDmgIncrease;
-        _defence = _level * _lvlUpDefIncrease;
+        _health += _level * _lvlUpHpIncrease;
+        _damage += _level * _lvlUpDmgIncrease;
+        _defence += _level * _lvlUpDefIncrease;
     }
 
     public override void LevelUp(int sum)
     {
         base.LevelUp(sum);
-        _health = _level * _lvlUpHpIncrease;
-        _defence = _level * _lvlUpDefIncrease;
-        _damage = _level * _lvlUpDmgIncrease;
+        _health += _level * _lvlUpHpIncrease;
+        _defence += _level * _lvlUpDefIncrease;
+        _damage += _level * _lvlUpDmgIncrease;
     }
 
     public override void GetDamage(float amount)
     { 
         base.GetDamage(amount - _defence);
         _target = GetClosestEnemy(_enemies);
+    }
+
+    protected override void DealDamage()
+    {
+        base.DealDamage();
+        Events.OnDealDamage?.Invoke((int)(_damage * _level ));
     }
 
     private Enemy CreatureToUnit(Creature c) => c as Enemy;

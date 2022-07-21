@@ -818,14 +818,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 919132147662208112}
-  _health: 80
-  _damage: 2
+  _health: 30
+  _damage: 4
   _creatureStats: {fileID: 919132147662208110}
   _raycastPos: {fileID: 1269270313}
-  _defence: 0.5
-  _lvlUpHpIncrease: 10
-  _lvlUpDefIncrease: 0.1
-  _lvlUpDmgIncrease: 0.4
+  _defence: 0.3
+  _lvlUpHpIncrease: 11
+  _lvlUpDefIncrease: 0.3
+  _lvlUpDmgIncrease: 0.6
   _isFromScroller: 0
 --- !u!114 &919132147662208110
 MonoBehaviour:
@@ -842,7 +842,6 @@ MonoBehaviour:
   _canvas: {fileID: 1949823671}
   _levelNum: {fileID: 1820266048}
   _healthSlider: {fileID: 1395428484}
-  _creature: {fileID: 919132147662208111}
 --- !u!195 &919132147662208109
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -853,7 +852,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.75
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

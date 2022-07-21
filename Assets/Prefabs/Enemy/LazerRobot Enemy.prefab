@@ -194,11 +194,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 1, b: 0.015245676, a: 1}
+    m_NormalColor: {r: 1, g: 0.0099952705, b: 0, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.043704987, g: 1, b: 0, a: 1}
+    m_DisabledColor: {r: 1, g: 0.07898483, b: 0, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1271,7 +1271,6 @@ MonoBehaviour:
   _canvas: {fileID: 937327053}
   _levelNum: {fileID: 1576107660}
   _healthSlider: {fileID: 603908615}
-  _creature: {fileID: 751349806227526181}
 --- !u!195 &919132147869222965
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1282,7 +1281,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.75
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1307,11 +1306,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 919132147869222968}
-  _health: 80
-  _damage: 2
+  _health: 30
+  _damage: 3
   _creatureStats: {fileID: 919132147869222966}
   _lvlUpHpIncrease: 10
-  _lvlUpDmgIncrease: 0.4
+  _lvlUpDmgIncrease: 0.5
 --- !u!1 &5601584164208605820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,7 +1399,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5878d36b81d424c86948961aed7b205b, type: 2}
+  - {fileID: 2100000, guid: 9fc9f244ef6b848cda69e561387dc28e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

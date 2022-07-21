@@ -63,7 +63,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.043704987, g: 1, b: 0, a: 1}
+    m_DisabledColor: {r: 1, g: 0.19320267, b: 0, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -984,7 +984,6 @@ MonoBehaviour:
   _canvas: {fileID: 1140134765}
   _levelNum: {fileID: 1646337659}
   _healthSlider: {fileID: 362401158}
-  _creature: {fileID: 775384947315871061}
 --- !u!195 &919132148692682267
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -995,7 +994,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.75
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1020,11 +1019,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 919132148692682270}
-  _health: 80
-  _damage: 2
+  _health: 30
+  _damage: 3
   _creatureStats: {fileID: 919132148692682268}
   _lvlUpHpIncrease: 10
-  _lvlUpDmgIncrease: 0.4
+  _lvlUpDmgIncrease: 0.5
 --- !u!1 &4741522660310165114
 GameObject:
   m_ObjectHideFlags: 0

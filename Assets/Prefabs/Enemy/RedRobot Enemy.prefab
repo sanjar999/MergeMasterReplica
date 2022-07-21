@@ -640,10 +640,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 7146094910005408014}
-  _health: 80
-  _damage: 2
+  _health: 30
+  _damage: 3
   _creatureStats: {fileID: 7146094910005408008}
-  _lvlUpHpIncrease: 10
+  _lvlUpHpIncrease: 6
   _lvlUpDmgIncrease: 0.4
 --- !u!114 &7146094910005408008
 MonoBehaviour:
@@ -660,7 +660,6 @@ MonoBehaviour:
   _canvas: {fileID: 8065224159794399867}
   _levelNum: {fileID: 8065224158822593322}
   _healthSlider: {fileID: 8065224160443035205}
-  _creature: {fileID: 1037188261436412041}
 --- !u!195 &7146094910005408011
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -671,7 +670,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.75
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

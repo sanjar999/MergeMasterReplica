@@ -34,10 +34,21 @@ public class GameProgress : MonoBehaviour
             PlayerPrefs.SetInt($"units_{i}_type", (int)_units[i].GetUnitType());
         }
     }
+    public void SetCoins(int amount)
+    {
+        PlayerPrefs.SetInt("coins", amount);
+    }
+    public void SetUnitPrice(int amount)
+    {
+        PlayerPrefs.SetInt("unit_price", amount);
+    }
 
     public int GetSvedUnitsCount() => PlayerPrefs.GetInt("units_count", 0);
     public int GetSvedUnitLevel(int index) => PlayerPrefs.GetInt ($"units_{index}_level", 0);
     public int GetSvedUnitIndexX(int index) => PlayerPrefs.GetInt($"unitTile_{index}_x",  0);
     public int GetSvedUnitIndexY(int index) => PlayerPrefs.GetInt($"unitTile_{index}_y",  0);
     public int GetSvedUnitType(int index) => PlayerPrefs.GetInt  ($"units_{index}_type", 0);
+    public int GetCoins() => PlayerPrefs.GetInt("coins", 100);
+    public int GetUnitPrice() => PlayerPrefs.GetInt("unit_price", 100);
+
 }

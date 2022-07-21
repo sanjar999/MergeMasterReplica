@@ -499,11 +499,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 1, b: 0.015245676, a: 1}
+    m_NormalColor: {r: 1, g: 0, b: 0.028783798, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.043704987, g: 1, b: 0, a: 1}
+    m_DisabledColor: {r: 1, g: 0, b: 0.01845169, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1048,7 +1048,6 @@ MonoBehaviour:
   _canvas: {fileID: 48231500}
   _levelNum: {fileID: 475279844}
   _healthSlider: {fileID: 1215511223}
-  _creature: {fileID: -8814483177321199286}
 --- !u!195 &919132149544420027
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1059,7 +1058,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.75
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1084,11 +1083,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 919132149544420030}
-  _health: 80
+  _health: 30
   _damage: 2
   _creatureStats: {fileID: 919132149544420028}
   _lvlUpHpIncrease: 10
-  _lvlUpDmgIncrease: 0.4
+  _lvlUpDmgIncrease: 0.6
 --- !u!1 &5034027333407218199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,10 +1335,6 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 887cc03493d67458f83488fdf4ed19de, type: 2}
-  - {fileID: 725804396391725484, guid: 82397bc9c1aac43dbbbee8552d42406e, type: 3}
-  - {fileID: -2813337366143557646, guid: 82397bc9c1aac43dbbbee8552d42406e, type: 3}
-  - {fileID: -541708846208547136, guid: 82397bc9c1aac43dbbbee8552d42406e, type: 3}
-  - {fileID: -5998004595915773402, guid: 82397bc9c1aac43dbbbee8552d42406e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1364,7 +1359,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 8691780276856062721, guid: 82397bc9c1aac43dbbbee8552d42406e, type: 3}
+  m_Mesh: {fileID: 1030266961010154006, guid: f9e4eb5975a4a438f964632338f3468d, type: 3}
   m_Bones:
   - {fileID: 7179174313355571126}
   - {fileID: 3396798710980036235}

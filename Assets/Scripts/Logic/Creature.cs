@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class Creature : MonoBehaviour
 {
     [SerializeField] protected Animator _animator;
-    [SerializeField] protected float _health = 80;
-    [SerializeField] protected float _damage = 2;
+    [SerializeField] protected float _health = 10;
+    [SerializeField] protected float _damage = 4;
     [SerializeField] protected CreatureStats _creatureStats;
 
     protected NavMeshAgent _agent;
@@ -40,6 +40,7 @@ public class Creature : MonoBehaviour
     protected virtual void DealDamage()
     {
         _target.GetComponent<Creature>().GetDamage(_damage * _level);
+        
     }
     public virtual void GetDamage(float amount)
     {
@@ -71,7 +72,7 @@ public class Creature : MonoBehaviour
             transform.LookAt(new Vector3(_target.transform.position.x, transform.position.y, _target.transform.position.z));
 
             _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-            if (_agent.remainingDistance <= _agent.stoppingDistance && damageOffset > .3f)
+            if (_agent.remainingDistance <= _agent.stoppingDistance && damageOffset > .1f)
             {
                 damageOffset = 0;
                 DealDamage();
