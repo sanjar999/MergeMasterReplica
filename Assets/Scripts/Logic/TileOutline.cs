@@ -11,8 +11,11 @@ public class TileOutline : MonoBehaviour
             {
                 _mat = other.GetComponent<MeshRenderer>().material;
                 var tile = other.GetComponent<Tile>();
+                var otherUnit = tile.GetCreature() as Unit;
 
-                if (tile.HasUnit() && tile.GetCreature().gameObject != transform.parent.gameObject)
+                if (tile.HasUnit() &&
+                    tile.GetCreature().gameObject != transform.parent.gameObject &&
+                    otherUnit.GetUnitType() != transform.parent.gameObject.GetComponent<Unit>().GetUnitType())
                     _mat.SetColor("_BaseColor", Color.red);
                 else
                     _mat.SetColor("_BaseColor", Color.green);
