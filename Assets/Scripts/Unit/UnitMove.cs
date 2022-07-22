@@ -52,6 +52,7 @@ public class UnitMove : MonoBehaviour
             currentUnit.IsDragging = true;
         }
     }
+
     private void UnselectUnit(ref Unit currentUnit, MergeUnit mergeUnit)
     {
         _isSelected = false;

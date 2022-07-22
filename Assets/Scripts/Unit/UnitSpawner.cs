@@ -11,6 +11,7 @@ public class UnitSpawner : MonoBehaviour
     [SerializeField] Unit[] _unitTypes;
     [SerializeField] Button _spawnUnit;
     [SerializeField] Transform _parent;
+    [SerializeField] float _priceIncreaseRate = 0;
     private List<Unit> _units = new List<Unit>();
     private List<Tile> _tiles = new List<Tile>();
     public List<Unit> GetUnits() => _units;
@@ -26,24 +27,49 @@ public class UnitSpawner : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        Events.OnFight += FadeButton;
+        Events.OnMerge += MaskButton;
+    }
+
+    private void OnDisable()
+    {
+        Events.OnFight -= FadeButton;
+        Events.OnMerge -= MaskButton;
+    }
+
+    private void FadeButton()
+    {
+        _buttonMask.SetActive(true);
+    }
+
     private void Start()
     {
         var randomUnit = (Unit.UnitType)Random.Range(0, (int)Unit.UnitType.length);
-        _spawnUnit.onClick.AddListener(() => SpawnUnit());
+        _spawnUnit.onClick.AddListener(() => {
+
+            if (!CanBuyUnit())
+            {
+                return;
+            }
+
+            SpawnUnit();
+            if (!_tileSpawner.HasEmptyTile() || !CanBuyUnit())
+            {
+                _buttonMask.SetActive(true);
+                return;
+            }
+
+        });
         _tiles = _tileSpawner.GetTiles();
         RestoreProgress();
-        if (_gameProgress.GetCoins() >= _gameProgress.GetUnitPrice())
-            _buttonMask.SetActive(false);
-        else
-            _buttonMask.SetActive(true);
-
-
+        MaskButton();
     }
 
     private void SpawnUnit()
     {
-        if (!CanBuyUnit())
-            return;
+        print("spawn");
 
         var randomUnitType = (Unit.UnitType)Random.Range(0, (int)Unit.UnitType.length);
 
@@ -63,8 +89,12 @@ public class UnitSpawner : MonoBehaviour
             instance.transform.position = randomTile.transform.position;
             instance.transform.SetParent(_parent);
         }
-        else SpawnUnit();
+        else
+        {
+            print("respawn");
 
+            SpawnUnit();
+        }
         Events.OnSpawn?.Invoke();
     }
 
@@ -103,7 +133,7 @@ public class UnitSpawner : MonoBehaviour
         {
             //_gameProgress.SetCoins(_gameProgress.GetCoins() - (int)currUnitPrice);
             Events.OnBuyUnit?.Invoke(-(int)currUnitPrice);
-            var newPrice = currUnitPrice += currUnitPrice * .25f;
+            var newPrice = currUnitPrice += currUnitPrice * _priceIncreaseRate;
             _gameProgress.SetUnitPrice((int)newPrice);
             if (_gameProgress.GetCoins() < currUnitPrice)
             {
@@ -116,4 +146,13 @@ public class UnitSpawner : MonoBehaviour
             return false;
         }
     }
+
+    private void MaskButton()
+    {
+        if (_gameProgress.GetCoins() >= _gameProgress.GetUnitPrice() && _tileSpawner.HasEmptyTile())
+            _buttonMask.SetActive(false);
+        else
+            _buttonMask.SetActive(true);
+    }
+
 }

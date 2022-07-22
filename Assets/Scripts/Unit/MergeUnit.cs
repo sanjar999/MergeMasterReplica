@@ -16,6 +16,7 @@ public class MergeUnit : MonoBehaviour
         unit_2.TryClearUnitTile();
         _unitSpawner.GetUnits().Remove(unit_2);
         Destroy(unit_2.gameObject);
+        Events.OnMerge?.Invoke();
         return true;
     }
 }

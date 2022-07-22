@@ -32,4 +32,3 @@ public class TileOutline : MonoBehaviour
             _mat.SetColor("_BaseColor", Color.clear);
     }
 }
-

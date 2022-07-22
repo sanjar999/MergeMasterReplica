@@ -2711,9 +2711,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1180126784}
     m_Modifications:
+    - target: {fileID: 1497151940, guid: 664c04f3f0f7e4a91a0930cff32a083c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1098146517051768986, guid: 664c04f3f0f7e4a91a0930cff32a083c, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1304238292470648968, guid: 664c04f3f0f7e4a91a0930cff32a083c, type: 3}
       propertyPath: m_IsActive
@@ -2721,7 +2725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1304238292470648968, guid: 664c04f3f0f7e4a91a0930cff32a083c, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 2517130273728313726, guid: 664c04f3f0f7e4a91a0930cff32a083c, type: 3}
       propertyPath: m_LocalScale.y
@@ -2733,7 +2737,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2517130273728313726, guid: 664c04f3f0f7e4a91a0930cff32a083c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.09
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284111113981292201, guid: 664c04f3f0f7e4a91a0930cff32a083c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4938278762086014684, guid: 664c04f3f0f7e4a91a0930cff32a083c, type: 3}
       propertyPath: m_Name

@@ -13,4 +13,5 @@ public class Events : MonoBehaviour
     public static Action OnFight;
     public static Action OnLose;
     public static Action OnWin;
+    public static Action OnMerge;
 }
