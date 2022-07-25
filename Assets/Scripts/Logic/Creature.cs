@@ -9,6 +9,7 @@ public class Creature : MonoBehaviour
     [SerializeField] protected float _health = 10;
     [SerializeField] protected float _damage = 4;
     [SerializeField] protected CreatureStats _creatureStats;
+    [SerializeField] protected ParticleSystem _fireParticles;
 
     protected NavMeshAgent _agent;
     protected Creature _target;
@@ -48,6 +49,7 @@ public class Creature : MonoBehaviour
         _creatureStats.UpdateHealth(_health);
         if (_health <= 0)
         {
+            _fireParticles.Stop();
             _agent.enabled = false;
             _animator.SetBool("isDead", true);
             Destroy(gameObject.GetComponent<Creature>());
@@ -80,6 +82,13 @@ public class Creature : MonoBehaviour
         }
         if (_target && transform)
             transform.LookAt(new Vector3(_target.transform.position.x, transform.position.y, _target.transform.position.z));
+    }
+    protected void StopParticles()
+    {
+        if (_fireParticles)
+        {
+            _fireParticles.Stop();
+        }
     }
     public void StartFightAnim() { _animator.SetBool("isAttack", true); }
 }

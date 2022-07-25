@@ -18,12 +18,15 @@ public class Enemy : Creature
 
     float sampleDuration = .5f;
     float duration;
+    private bool _fireParticlesIsOff;
 
     private void Start()
     {
         Events.OnFight += () => _isFight = true;
         Events.OnFight += StartFightAnim;
         Events.OnSpawn += GetEnemies;
+        Events.OnWin += StopParticles;
+        Events.OnLose += StopParticles;
         _creatureStats.SetHealthSlider(_health);
         _creatureStats.UpdateLevel(_level.ToString());
         _agent = GetComponent<NavMeshAgent>();
@@ -35,6 +38,8 @@ public class Enemy : Creature
         Events.OnFight -= () => _isFight = true;
         Events.OnFight -= StartFightAnim;
         Events.OnSpawn -= GetEnemies;
+        Events.OnWin -= StopParticles;
+        Events.OnLose -= StopParticles;
 
     }
 
@@ -45,6 +50,18 @@ public class Enemy : Creature
         if (_isFight && duration >= sampleDuration)
             Attack();
         _animator.SetFloat("Blend", _agent.velocity.magnitude);
+
+        if (_fireParticles)
+            if (_isFight && _agent.velocity.magnitude == 0 && _fireParticlesIsOff && !_isLose)
+            {
+                _fireParticles.Play();
+                _fireParticlesIsOff = false;
+            }
+            else
+            {
+                _fireParticles.Stop();
+                _fireParticlesIsOff = true;
+            }
     }
 
     public override void SetLevel(int level)
@@ -67,7 +84,6 @@ public class Enemy : Creature
             _isLose = true;
             _agent.isStopped = true;
             _animator.SetBool("isAttack", false);
-            Events.OnLose?.Invoke();
             return;
         }
         base.Attack();

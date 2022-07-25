@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
     [SerializeField] private StageManager _stageManager;
     [SerializeField] private GameProgress _gameProgress;
 
+
     private void OnEnable()
     {
         Events.OnDealDamage += IncreaseCoinsAmount;

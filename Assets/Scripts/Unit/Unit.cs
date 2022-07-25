@@ -11,15 +11,13 @@ public class Unit : Creature
     [SerializeField] protected float _lvlUpHpIncrease = 10f;
     [SerializeField] protected float _lvlUpDefIncrease = .2f;
     [SerializeField] protected float _lvlUpDmgIncrease = .6f;
-    [SerializeField] private bool _isFromScroller;
-
 
     protected Tile _unitTile;
     protected UnitType _unitType;
     protected EnemySpawner _enemySpawner;
     protected bool _isWin;
 
-    public enum UnitType { reddy, greenSpy, scorpy, lazer, pyro, cryo , length }
+    public enum UnitType { reddy, greenSpy, scorpy, lazer, pyro, cryo, length }
     public bool IsDragging { get; set; }
     public void SetTile(Tile tile) { _unitTile = tile; }
     public Tile GetTile() => _unitTile;
@@ -30,12 +28,15 @@ public class Unit : Creature
 
     float sampleDuration = .5f;
     float duration;
+    private bool _fireParticlesIsOff = true;
 
     private void Start()
     {
         Events.OnFight += () => _isFight = true;
         Events.OnFight += StartFightAnim;
         Events.OnSpawn += GetEnemies;
+        Events.OnWin += StopParticles;
+        Events.OnLose += StopParticles;
         _agent = GetComponent<NavMeshAgent>();
         _creatureStats.UpdateLevel(_level.ToString());
         _creatureStats.SetHealthSlider(_health);
@@ -47,6 +48,8 @@ public class Unit : Creature
         Events.OnFight -= () => _isFight = true;
         Events.OnFight -= StartFightAnim;
         Events.OnSpawn -= GetEnemies;
+        Events.OnWin -= StopParticles;
+        Events.OnLose -= StopParticles;
     }
 
     private void Update()
@@ -54,18 +57,33 @@ public class Unit : Creature
         float frameDuration = Time.unscaledDeltaTime;
         duration += frameDuration;
         if (_isFight && duration >= sampleDuration)
-                Attack();
+            Attack();
         if (_animator)
             _animator.SetFloat("Blend", _agent.velocity.magnitude);
+
+        if (_fireParticles)
+            if (_isFight && _agent.velocity.magnitude == 0 && _fireParticlesIsOff && !_isWin)
+            {
+                _fireParticles.Play();
+                _fireParticlesIsOff = false;
+            }
+            else
+            {
+                _fireParticles.Stop();
+                _fireParticlesIsOff = true;
+            }
+
+
     }
+
     private void GetEnemies()
     {
-            _enemies = _enemySpawner.GetEnemies().ConvertAll(new Converter<Enemy, Creature>(CreatureToUnit));
+        _enemies = _enemySpawner.GetEnemies().ConvertAll(new Converter<Enemy, Creature>(CreatureToUnit));
     }
 
     protected override void Attack()
     {
-        if (!_enemySpawner.HasEnemy&& !_isWin)
+        if (!_enemySpawner.HasEnemy && !_isWin)
         {
             _isWin = true;
             _agent.isStopped = true;
@@ -92,7 +110,7 @@ public class Unit : Creature
     }
 
     public override void GetDamage(float amount)
-    { 
+    {
         base.GetDamage(amount - _defence);
         _target = GetClosestEnemy(_enemies);
     }
@@ -100,7 +118,7 @@ public class Unit : Creature
     protected override void DealDamage()
     {
         base.DealDamage();
-        Events.OnDealDamage?.Invoke((int)(_damage * _level ));
+        Events.OnDealDamage?.Invoke((int)(_damage * _level));
     }
 
     private Enemy CreatureToUnit(Creature c) => c as Enemy;
@@ -112,7 +130,7 @@ public class Unit : Creature
 
     public void SetAgentSpeed(float speed)
     {
-        float t = Math.Abs(speed-1);
+        float t = Math.Abs(speed - 1);
         DOTween.To(() => t, x => t = x, speed, 0.2f);
         _agent.speed = t;
     }
