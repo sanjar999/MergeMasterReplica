@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using DG.Tweening;
 public class Creature : MonoBehaviour
 {
     [SerializeField] protected Animator _animator;
@@ -10,7 +10,7 @@ public class Creature : MonoBehaviour
     [SerializeField] protected float _damage = 4;
     [SerializeField] protected CreatureStats _creatureStats;
     [SerializeField] protected ParticleSystem _fireParticles;
-
+    [SerializeField] protected Material _mat;
     protected NavMeshAgent _agent;
     protected Creature _target;
     protected int _level = 1;
@@ -49,7 +49,10 @@ public class Creature : MonoBehaviour
         _creatureStats.UpdateHealth(_health);
         if (_health <= 0)
         {
-            _fireParticles.Stop();
+            if (_fireParticles)
+                _fireParticles.Stop();
+
+            _mat.DOFade(0,0.5f);
             _agent.enabled = false;
             _animator.SetBool("isDead", true);
             Destroy(gameObject.GetComponent<Creature>());

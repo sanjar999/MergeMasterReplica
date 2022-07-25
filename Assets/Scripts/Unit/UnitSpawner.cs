@@ -11,7 +11,7 @@ public class UnitSpawner : MonoBehaviour
     [SerializeField] Unit[] _unitTypes;
     [SerializeField] Button _spawnUnit;
     [SerializeField] Transform _parent;
-    [SerializeField] float _priceIncreaseRate = 0;
+    [SerializeField] float _priceIncreaseRate = 0.25f;
     private List<Unit> _units = new List<Unit>();
     private List<Tile> _tiles = new List<Tile>();
     private bool _isLose;
@@ -78,7 +78,8 @@ public class UnitSpawner : MonoBehaviour
     {
         print("spawn");
         //(int)Unit.UnitType.length
-        var randomUnitType = (Unit.UnitType)Random.Range(0, 1);
+        //var randomUnitType = (Unit.UnitType)Random.Range(0, 1);
+        var randomUnitType = (Unit.UnitType)Random.Range(0, (int)Unit.UnitType.length);
 
         if (!_tileSpawner.HasEmptyTile())
             return;
